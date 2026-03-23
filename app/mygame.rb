@@ -40,7 +40,7 @@ class MyGame < Game
         auto_highlight :scratch, 100, 20
         reveal_button :scratch
 
-        create_actor :hoard_ambient, ticks_total = (100 + rand(20)), location=:hoard
+        create_actor :hoard_ambient, ticks_total = (600 + rand(120)), location=:hoard
 
         create_button :venture, 600,400, "Venture Forth"
         @buttons[:venture].location =  [:hoard]
@@ -69,7 +69,7 @@ class MyGame < Game
         # Maybe these get a custom color
         add_message :log, HOARD_MESSAGES.sample()
 
-        restart_actor :hoard_ambient, ticks_total = (100 + rand(20))
+        restart_actor :hoard_ambient, ticks_total = (600 + rand(120))
     end
 
     #----------------------
@@ -111,6 +111,7 @@ class MyGame < Game
                 generate_resource :gold
                 restart_highlight :scratch, 0
                 add_message :log, SCRATCH_MESSAGES.sample()
+                # Need a way to speed this up over time.
             else
                 add_message :log, "You're far too tired to do that right now."
             end

@@ -375,11 +375,11 @@ class Game
     end
 
     def restart_actor id, ticks_total=nil
-        a = @actors.id
-        a.ticks_remaining = 0
+        a = @actors[id]
         if ticks_total
             a.ticks_total = ticks_total
         end
+        a.ticks_remaining = a.ticks_total
     end
 
 # Returns true if the actor should tick this frame
