@@ -6,6 +6,10 @@ class MyGame < Game
     def initialize args
         super
 
+        dragon_type = args.state.dragon_type || :forest
+
+        @setting = ProcGen.get_terrain(dragon_type)
+
         @location = :hoard
         @hoard_items = []
 
@@ -67,7 +71,7 @@ class MyGame < Game
         ]
 
         # Maybe these get a custom color
-        add_message :log, HOARD_MESSAGES.sample()
+        add_message :log, @setting.hoard_messages.sample()
 
         restart_actor :hoard_ambient, ticks_total = (600 + rand(120))
     end

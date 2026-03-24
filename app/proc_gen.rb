@@ -1,5 +1,88 @@
 module ProcGen
 
+    TERRAIN_TYPES = {
+        :forest =>
+        {
+            description: "",
+            biomes: {
+                hoard: [:cave],
+                outside: [:forest, :clearing, :hill],
+                secondary: [:underground_river, :mine]
+            },
+            hoard_messages: [
+                "The hoard settles softly.",
+                "A faint clink echoes through the cave.",
+                "The faint glow of your hoard dances on the cave walls",
+                "The subteranean sussuration is soothing.",
+                "You glance at your hoard and feel the warmth of ownership."
+            ],
+        },
+        :undersea => {},
+        :arctic => {},
+        :desert => {},
+        :volcano => {},
+        :mountain =>{}
+    }
+
+    BIOMES =[
+        :cave => {
+            treasure_types: {
+                common: [:coin],
+                uncommon: [:gem],
+                rare: [:wood, :jewelry, :ring, :amulet, :tome]
+            },
+            follower_types: [:kobold, :goblin],
+        },
+        :forest => {
+            treasure_types: {
+                common: [:coin],
+                uncommon: [:gem],
+                rare: [:wood, :jewelry, :ring, :amulet, :tome]
+            },
+            follower_types: [:kobold, :goblin, :princess, :dryad],
+        },
+        :clearing => {
+            treasure_types: {
+                common: [:coin],
+                uncommon: [:gem],
+                rare: [:wood, :jewelry, :ring, :amulet, :tome]
+            },
+            follower_types: [:kobold, :goblin, :princess],
+        },
+        :hill => {
+            treasure_types: {
+                common: [:coin],
+                uncommon: [:gem],
+                rare: [:wood, :jewelry, :ring, :amulet, :tome]
+            },
+            follower_types: [:kobold, :goblin, :princess],
+        },
+        :indergroud_river => {
+            treasure_types: {
+                common: [:coin],
+                uncommon: [:gem],
+                rare: [:jewelry, :ring, :amulet, :pearl]
+            },
+            follower_types: [:merfolk],
+        },
+        :mine => {
+            treasure_types: {
+                common: [:coin],
+                uncommon: [:gem],
+                rare: [:wood, :jewelry, :ring, :amulet, :tome]
+            },
+            follower_types: [:kobold, :goblin],
+        },
+    ]
+
+    def self.get_terrain type
+        TERRAIN_TYPES[type]
+    end
+
+    def self.get_biome type
+        BIOMES[type]
+    end
+
     CONDITIONS = [
         "cracked",
         "weathered",
