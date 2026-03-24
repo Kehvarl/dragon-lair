@@ -1,13 +1,13 @@
 module ProcGen
 
     TERRAIN_TYPES = {
-        :forest ->
+        :forest =>
         {
             description: "",
             biomes: {
                 hoard: [:cave],
                 outside: [:forest, :clearing, :hill],
-                secondary: [:underground_river, :mine, :]
+                secondary: [:underground_river, :mine]
             },
             hoard_messages: [
                 "The hoard settles softly.",
@@ -16,17 +16,16 @@ module ProcGen
                 "The subteranean sussuration is soothing.",
                 "You glance at your hoard and feel the warmth of ownership."
             ],
-
         },
-        :undersea -> {},
-        :arctic -> {},
-        :desert -> {},
-        :volcano -> {},
-        :mountain ->{}
+        :undersea => {},
+        :arctic => {},
+        :desert => {},
+        :volcano => {},
+        :mountain =>{}
     }
 
     BIOMES =[
-        :cave -> {
+        :cave => {
             treasure_types: {
                 common: [:coin],
                 uncommon: [:gem],
@@ -34,7 +33,7 @@ module ProcGen
             },
             follower_types: [:kobold, :goblin],
         },
-        :forest -> {
+        :forest => {
             treasure_types: {
                 common: [:coin],
                 uncommon: [:gem],
@@ -42,7 +41,7 @@ module ProcGen
             },
             follower_types: [:kobold, :goblin, :princess, :dryad],
         },
-        :clearing -> {
+        :clearing => {
             treasure_types: {
                 common: [:coin],
                 uncommon: [:gem],
@@ -50,7 +49,7 @@ module ProcGen
             },
             follower_types: [:kobold, :goblin, :princess],
         },
-        :hill -> {
+        :hill => {
             treasure_types: {
                 common: [:coin],
                 uncommon: [:gem],
@@ -58,7 +57,7 @@ module ProcGen
             },
             follower_types: [:kobold, :goblin, :princess],
         },
-        :indergroud_river -> {
+        :indergroud_river => {
             treasure_types: {
                 common: [:coin],
                 uncommon: [:gem],
@@ -66,7 +65,7 @@ module ProcGen
             },
             follower_types: [:merfolk],
         },
-        :mine -> {
+        :mine => {
             treasure_types: {
                 common: [:coin],
                 uncommon: [:gem],
@@ -75,6 +74,14 @@ module ProcGen
             follower_types: [:kobold, :goblin],
         },
     ]
+
+    def self.get_terrain type
+        TERRAIN_TYPES[type]
+    end
+
+    def self.get_biome type
+        BIOMES[type]
+    end
 
     CONDITIONS = [
         "cracked",
