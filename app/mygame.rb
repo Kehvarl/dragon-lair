@@ -6,6 +6,8 @@ class MyGame < Game
     def initialize args
         super
 
+        @dragon_type = args.dragon_type || :forest
+
         @location = :hoard
         @hoard_items = []
 
