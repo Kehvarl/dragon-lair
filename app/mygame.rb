@@ -8,7 +8,7 @@ class MyGame < Game
 
         dragon_type = args.state.dragon_type || :forest
 
-        @setting = ProcGen.get_terrain(dragon_type)
+        @lair = ProcGen.build_lair(dragon_type)
 
         @location = :hoard
         @hoard_items = []
@@ -62,16 +62,8 @@ class MyGame < Game
     end
 
     def hoard_ambient_trigger
-        HOARD_MESSAGES = [
-            "The hoard settles softly.",
-            "A faint clink echoes through the cave.",
-            "The faint glow of your hoard dances on the cave walls",
-            "The subteranean sussuration is soothing.",
-            "You glance at your hoard and feel the warmth of ownership."
-        ]
-
         # Maybe these get a custom color
-        add_message :log, @setting.hoard_messages.sample()
+        add_message :log, @lair.hoard.hoard_messages.sample()
 
         restart_actor :hoard_ambient, ticks_total = (600 + rand(120))
     end
@@ -108,7 +100,7 @@ class MyGame < Game
             if use_resource(:energy, 9 + rand(4))
                 generate_resource :gold
                 restart_highlight :scratch, 0
-                add_message :log, @setting.scratch_messages.sample()
+                add_message :log, @lair.hoard.scratch_messages.sample()
                 # Need a way to speed this up over time.
             else
                 add_message :log, "You're far too tired to do that right now."
