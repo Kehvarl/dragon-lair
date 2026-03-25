@@ -102,19 +102,13 @@ class MyGame < Game
         # = Coins
         # = Gems
         # = Certain types of artifact (metal weapons, rings, magic things)
-        SCRATCH_MESSAGES = [
-            "You dislodge a coin from the stone.",
-            "Your claws scrape against buried metal.",
-            "The hoard shifts with a pleasing clink.",
-            "Dust and gold scatter beneath your talons.",
-            "You uncover something small and valuable."
-        ]
+
 
         if button_highlight_full?(:scratch)
             if use_resource(:energy, 9 + rand(4))
                 generate_resource :gold
                 restart_highlight :scratch, 0
-                add_message :log, SCRATCH_MESSAGES.sample()
+                add_message :log, @setting.scratch_messages.sample()
                 # Need a way to speed this up over time.
             else
                 add_message :log, "You're far too tired to do that right now."
