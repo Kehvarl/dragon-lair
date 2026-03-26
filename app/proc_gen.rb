@@ -41,7 +41,7 @@ module ProcGen
         {
             description: "",
             biomes: {
-                hoard: [:lave_cave],
+                hoard: [:lava_cave],
                 outside: [:lava_flow, :clearing, :hill],
                 secondary: [:underground_river, :mine]
             },
@@ -146,7 +146,7 @@ module ProcGen
                 "You uncover something small and valuable."
             ],
         },
-        :undergroud_river => {
+        :underground_river => {
             treasure_types: {
                 common: [:coin],
                 uncommon: [:gem],

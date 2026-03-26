@@ -59,6 +59,9 @@ class MyGame < Game
         highlight_button :nap, 100
         reveal_button :nap
 
+        create_unlock :gems
+        create_unlock :artifacts
+
     end
 
     def hoard_ambient_trigger
@@ -98,14 +101,40 @@ class MyGame < Game
 
         if button_highlight_full?(:scratch)
             if use_resource(:energy, 9 + rand(4))
-                generate_resource :gold
+                # Need a way to scope this to the finds we can get from a biome
+                # Maybe all biomes have gold and gems, and we just need a generator for artifacts
+                r = rand
+                if r < .3 and unlocked?(:artifacts)
+                elsif r > .4 and unlocked?(:gems)
+                    generate_resource :gems
+                    add_message :log, @lair.hoard.scratch_messages.sample() #Replace with Gem messages later
+                else
+                    generate_resource :gold, rand(1, 3) # Create a generate_gold helper that generated more gold based on conditions. Hoard size, time elapsed, something. Or maybe special artifacts.
+                    add_message :log, @lair.hoard.scratch_messages.sample()
+                end
+
                 restart_highlight :scratch, 0
-                add_message :log, @lair.hoard.scratch_messages.sample()
-                # Need a way to speed this up over time.
+                # Need a way to speed this up over time.  Maybe some more unlocks or actors
             else
                 add_message :log, "You're far too tired to do that right now."
             end
+
+            if not unlocked?(:gems) and get_resource(:gold) > 25
+                unlock(:gems)
+            end
+
+            if not unlocked?(:artifacts) and get_resource(:gems) > 25
+                unlock(:artifacts)
+            end
         end
+    end
+
+    def gems_unlocked
+        # The lair should have a custom unlock message list for this
+    end
+
+    def artifacts_unlocked
+        # custom list for this too. Maybe we find our first artifact, or set a flag to find one next time we dig
     end
 
     def nap_clicked
