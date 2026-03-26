@@ -9,6 +9,84 @@ module ProcGen
                 outside: [:forest, :clearing, :hill],
                 secondary: [:underground_river, :mine]
             },
+        },
+        :undersea =>
+         {
+            description: "",
+            biomes: {
+                hoard: [:undersea_cavern],
+                outside: [:seabed, :clearing, :hill],
+                secondary: [:underground_river, :mine]
+            },
+        },
+        :arctic =>
+        {
+            description: "",
+            biomes: {
+                hoard: [:cave],
+                outside: [:glacier, :clearing, :hill],
+                secondary: [:deep_cave, :mine]
+            },
+        },
+        :desert =>
+        {
+            description: "",
+            biomes: {
+                hoard: [:cave],
+                outside: [:dunes, :clearing, :hill],
+                secondary: [:underground_river, :mine]
+            },
+        },
+        :volcano =>
+        {
+            description: "",
+            biomes: {
+                hoard: [:lava_cave],
+                outside: [:lava_flow, :clearing, :hill],
+                secondary: [:underground_river, :mine]
+            },
+        },
+        :mountain =>
+        {
+            description: "",
+            biomes: {
+                hoard: [:cave],
+                outside: [:forest, :clearing, :hill],
+                secondary: [:underground_river, :mine]
+            },
+        },
+    }
+
+    BIOMES ={
+        :cave => {
+            treasure_types: {
+                common: [:coin],
+                uncommon: [:gem],
+                rare: [:wood, :jewelry, :ring, :amulet, :tome]
+            },
+            hoard_messages: [
+                "The hoard settles softly.",
+                "A faint clink echoes through the cave.",
+                "The faint glow of your hoard dances on the cave walls",
+                "The subteranean sussuration is soothing.",
+                "You glance at your hoard and feel the warmth of ownership."
+            ],
+            scratch_messages: [
+                "You dislodge a coin from the stone.",
+                "Your claws scrape against buried metal.",
+                "The hoard shifts with a pleasing clink.",
+                "Dust and gold scatter beneath your talons.",
+                "You uncover something small and valuable."
+            ],
+            follower_types: [:kobold, :goblin],
+        },
+        :forest => {
+            treasure_types: {
+                common: [:coin],
+                uncommon: [:gem],
+                rare: [:wood, :jewelry, :ring, :amulet, :tome]
+            },
+            follower_types: [:kobold, :goblin, :princess, :dryad],
             hoard_messages: [
                 "The hoard settles softly.",
                 "A faint clink echoes through the cave.",
@@ -24,14 +102,101 @@ module ProcGen
                 "You uncover something small and valuable."
             ],
         },
-        :undersea =>
-         {
-            description: "",
-            biomes: {
-                hoard: [:undersea_cavern],
-                outside: [:seabed, :clearing, :hill],
-                secondary: [:underground_river, :mine]
+        :clearing => {
+            treasure_types: {
+                common: [:coin],
+                uncommon: [:gem],
+                rare: [:wood, :jewelry, :ring, :amulet, :tome]
             },
+            follower_types: [:kobold, :goblin, :princess],
+            hoard_messages: [
+                "The hoard settles softly.",
+                "A faint clink echoes through the cave.",
+                "The faint glow of your hoard dances on the cave walls",
+                "The subteranean sussuration is soothing.",
+                "You glance at your hoard and feel the warmth of ownership."
+            ],
+            scratch_messages: [
+                "You dislodge a coin from the stone.",
+                "Your claws scrape against buried metal.",
+                "The hoard shifts with a pleasing clink.",
+                "Dust and gold scatter beneath your talons.",
+                "You uncover something small and valuable."
+            ],
+        },
+        :hill => {
+            treasure_types: {
+                common: [:coin],
+                uncommon: [:gem],
+                rare: [:wood, :jewelry, :ring, :amulet, :tome]
+            },
+            follower_types: [:kobold, :goblin, :princess],
+            hoard_messages: [
+                "The hoard settles softly.",
+                "A faint clink echoes through the cave.",
+                "The faint glow of your hoard dances on the cave walls",
+                "The subteranean sussuration is soothing.",
+                "You glance at your hoard and feel the warmth of ownership."
+            ],
+            scratch_messages: [
+                "You dislodge a coin from the stone.",
+                "Your claws scrape against buried metal.",
+                "The hoard shifts with a pleasing clink.",
+                "Dust and gold scatter beneath your talons.",
+                "You uncover something small and valuable."
+            ],
+        },
+        :underground_river => {
+            treasure_types: {
+                common: [:coin],
+                uncommon: [:gem],
+                rare: [:jewelry, :ring, :amulet, :pearl]
+            },
+            follower_types: [:merfolk],
+            hoard_messages: [
+                "The hoard settles softly.",
+                "A faint clink echoes through the cave.",
+                "The faint glow of your hoard dances on the cave walls",
+                "The subteranean sussuration is soothing.",
+                "You glance at your hoard and feel the warmth of ownership."
+            ],
+            scratch_messages: [
+                "You dislodge a coin from the stone.",
+                "Your claws scrape against buried metal.",
+                "The hoard shifts with a pleasing clink.",
+                "Dust and gold scatter beneath your talons.",
+                "You uncover something small and valuable."
+            ],
+        },
+        :mine => {
+            treasure_types: {
+                common: [:coin],
+                uncommon: [:gem],
+                rare: [:wood, :jewelry, :ring, :amulet, :tome]
+            },
+            follower_types: [:kobold, :goblin],
+            hoard_messages: [
+                "The hoard settles softly.",
+                "A faint clink echoes through the cave.",
+                "The faint glow of your hoard dances on the cave walls",
+                "The subteranean sussuration is soothing.",
+                "You glance at your hoard and feel the warmth of ownership."
+            ],
+            scratch_messages: [
+                "You dislodge a coin from the stone.",
+                "Your claws scrape against buried metal.",
+                "The hoard shifts with a pleasing clink.",
+                "Dust and gold scatter beneath your talons.",
+                "You uncover something small and valuable."
+            ],
+        },
+        :undersea_cavern => {
+            treasure_types: {
+                common: [:coin],
+                uncommon: [:gem],
+                rare: [:wood, :jewelry, :ring, :amulet, :tome]
+            },
+            follower_types: [:kobold, :goblin],
             hoard_messages: [
                 "The hoard settles softly.",
                 "The shifting tide causes the water in your cavern to squeeze you soothingly.",
@@ -47,157 +212,19 @@ module ProcGen
                 "You uncover something small and valuable."
             ],
         },
-        :arctic =>
-        {
-            description: "",
-            biomes: {
-                hoard: [:cave],
-                outside: [:glacier, :clearing, :hill],
-                secondary: [:deep_cave, :mine]
-            },
-            hoard_messages: [
-                "The hoard settles softly.",
-                "A faint clink echoes through the cave.",
-                "The faint glow of your hoard dances on the cave walls",
-                "The subteranean sussuration is soothing.",
-                "You glance at your hoard and feel the warmth of ownership."
-            ],
-            scratch_messages: [
-                "You dislodge a coin from the stone.",
-                "Your claws scrape against buried metal.",
-                "The hoard shifts with a pleasing clink.",
-                "Dust and gold scatter beneath your talons.",
-                "You uncover something small and valuable."
-            ],
-        },
-        :desert =>
-        {
-            description: "",
-            biomes: {
-                hoard: [:cave],
-                outside: [:dunes, :clearing, :hill],
-                secondary: [:underground_river, :mine]
-            },
-            hoard_messages: [
-                "The hoard settles softly.",
-                "A faint clink echoes through the cave.",
-                "The faint glow of your hoard dances on the cave walls",
-                "The subteranean sussuration is soothing.",
-                "You glance at your hoard and feel the warmth of ownership."
-            ],
-            scratch_messages: [
-                "You dislodge a coin from the stone.",
-                "Your claws scrape against buried metal.",
-                "The hoard shifts with a pleasing clink.",
-                "Dust and gold scatter beneath your talons.",
-                "You uncover something small and valuable."
-            ],
-        },
-        :volcano =>
-        {
-            description: "",
-            biomes: {
-                hoard: [:lave_cave],
-                outside: [:lava_flow, :clearing, :hill],
-                secondary: [:underground_river, :mine]
-            },
-            hoard_messages: [
-                "The hoard settles softly.",
-                "A faint clink echoes through the cave.",
-                "The faint glow of your hoard dances on the cave walls",
-                "The subteranean sussuration is soothing.",
-                "You glance at your hoard and feel the warmth of ownership."
-            ],
-            scratch_messages: [
-                "You dislodge a coin from the stone.",
-                "Your claws scrape against buried metal.",
-                "The hoard shifts with a pleasing clink.",
-                "Dust and gold scatter beneath your talons.",
-                "You uncover something small and valuable."
-            ],
-        },
-        :mountain =>
-        {
-            description: "",
-            biomes: {
-                hoard: [:cave],
-                outside: [:forest, :clearing, :hill],
-                secondary: [:underground_river, :mine]
-            },
-            hoard_messages: [
-                "The hoard settles softly.",
-                "A faint clink echoes through the cave.",
-                "The faint glow of your hoard dances on the cave walls",
-                "The subteranean sussuration is soothing.",
-                "You glance at your hoard and feel the warmth of ownership."
-            ],
-            scratch_messages: [
-                "You dislodge a coin from the stone.",
-                "Your claws scrape against buried metal.",
-                "The hoard shifts with a pleasing clink.",
-                "Dust and gold scatter beneath your talons.",
-                "You uncover something small and valuable."
-            ],
-        },
     }
 
-    BIOMES =[
-        :cave => {
-            treasure_types: {
-                common: [:coin],
-                uncommon: [:gem],
-                rare: [:wood, :jewelry, :ring, :amulet, :tome]
-            },
-            follower_types: [:kobold, :goblin],
-        },
-        :forest => {
-            treasure_types: {
-                common: [:coin],
-                uncommon: [:gem],
-                rare: [:wood, :jewelry, :ring, :amulet, :tome]
-            },
-            follower_types: [:kobold, :goblin, :princess, :dryad],
-        },
-        :clearing => {
-            treasure_types: {
-                common: [:coin],
-                uncommon: [:gem],
-                rare: [:wood, :jewelry, :ring, :amulet, :tome]
-            },
-            follower_types: [:kobold, :goblin, :princess],
-        },
-        :hill => {
-            treasure_types: {
-                common: [:coin],
-                uncommon: [:gem],
-                rare: [:wood, :jewelry, :ring, :amulet, :tome]
-            },
-            follower_types: [:kobold, :goblin, :princess],
-        },
-        :undergroud_river => {
-            treasure_types: {
-                common: [:coin],
-                uncommon: [:gem],
-                rare: [:jewelry, :ring, :amulet, :pearl]
-            },
-            follower_types: [:merfolk],
-        },
-        :mine => {
-            treasure_types: {
-                common: [:coin],
-                uncommon: [:gem],
-                rare: [:wood, :jewelry, :ring, :amulet, :tome]
-            },
-            follower_types: [:kobold, :goblin],
-        },
-    ]
+    def self.build_lair type
+        terrain = TERRAIN_TYPES[type]
+        hoard = BIOMES[terrain.biomes.hoard.sample()]
+        outside = BIOMES[terrain.biomes.outside.sample()]
 
-    def self.get_terrain type
-        TERRAIN_TYPES[type]
-    end
-
-    def self.get_biome type
-        BIOMES[type]
+        return {
+            hoard: hoard,
+            outside: outside,
+            discoverable: terrain.biomes.secondary,
+            discovered: []
+        }
     end
 
     CONDITIONS = [
