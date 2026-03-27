@@ -66,7 +66,7 @@ class MyGame < Game
 
     def hoard_ambient_trigger
         # Maybe these get a custom color
-        add_message :log, @lair.hoard.hoard_messages.sample()
+        add_message :log, @lair.hoard.hoard_messages.sample(), @lair.hoard.ambient_color
 
         restart_actor :hoard_ambient, ticks_total = (600 + rand(120))
     end
@@ -104,13 +104,15 @@ class MyGame < Game
                 # Need a way to scope this to the finds we can get from a biome
                 # Maybe all biomes have gold and gems, and we just need a generator for artifacts
                 r = rand
-                if r < .3 and unlocked?(:artifacts)
-                elsif r > .4 and unlocked?(:gems)
+                if r < 0.3 and unlocked?(:artifacts)
+                elsif r > 0.4 and unlocked?(:gems)
+                    f = ProcGen.get_find(@lair.hoard, :uncommon)
                     generate_resource :gems
                     add_message :log, @lair.hoard.scratch_messages.sample() #Replace with Gem messages later
                 else
-                    generate_resource :gold, rand(1, 3) # Create a generate_gold helper that generated more gold based on conditions. Hoard size, time elapsed, something. Or maybe special artifacts.
-                    add_message :log, @lair.hoard.scratch_messages.sample()
+                    f = ProcGen.get_find(@lair.hoard, :common)
+                    generate_resource :gold, f.value.floor.clamp(1,5) # Create a generate_gold helper that generated more gold based on conditions. Hoard size, time elapsed, something. Or maybe special artifacts.
+                    add_message :log, f.message #@lair.hoard.scratch_messages.sample()
                 end
 
                 restart_highlight :scratch, 0
