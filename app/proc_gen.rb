@@ -59,6 +59,7 @@ module ProcGen
 
     BIOMES ={
         :cave => {
+            ambient_color: { r: 170, g: 200, b: 230 },
             treasure_types: {
                 common: [:coin],
                 uncommon: [:gem],
@@ -81,6 +82,7 @@ module ProcGen
             follower_types: [:kobold, :goblin],
         },
         :forest => {
+            ambient_color: { r: 170, g: 230, b: 200 },
             treasure_types: {
                 common: [:coin],
                 uncommon: [:gem],
@@ -103,6 +105,7 @@ module ProcGen
             ],
         },
         :clearing => {
+            ambient_color: { r: 170, g: 230, b: 230 },
             treasure_types: {
                 common: [:coin],
                 uncommon: [:gem],
@@ -125,6 +128,7 @@ module ProcGen
             ],
         },
         :hill => {
+            ambient_color: { r: 170, g: 200, b: 200 },
             treasure_types: {
                 common: [:coin],
                 uncommon: [:gem],
@@ -147,6 +151,7 @@ module ProcGen
             ],
         },
         :underground_river => {
+            ambient_color: { r: 150, g: 180, b: 230 },
             treasure_types: {
                 common: [:coin],
                 uncommon: [:gem],
@@ -169,6 +174,7 @@ module ProcGen
             ],
         },
         :mine => {
+            ambient_color: { r: 200, g: 180, b: 200 },
             treasure_types: {
                 common: [:coin],
                 uncommon: [:gem],
@@ -191,6 +197,7 @@ module ProcGen
             ],
         },
         :undersea_cavern => {
+            ambient_color: { r: 140, g: 220, b: 240 },
             treasure_types: {
                 common: [:coin],
                 uncommon: [:gem],
@@ -214,6 +221,32 @@ module ProcGen
         },
     }
 
+    COIN_CONDITION = [
+        {condition: "dull", value: 0.5},
+        {condition: "broken", value: 0.5},
+        {condition: "simple", value: 1.0},
+        {condition: "plain", value: 1.0},
+        {condition: "fine", value: 1.0},
+        {condition: "shiny", value: 1.5},
+        {condition: "gleaming", value: 1.5}
+    ]
+
+    COIN_MATERIAL = [
+        {material: "tin", value: 0.25},
+        {material: "copper", value: 0.5},
+        {material: "bronze", value: 1.0},
+        {material: "gold", value: 1.5},
+        {material: "platinum", value: 2.0},
+    ]
+
+    COIN_ACTIONS = [
+        "falls to the floor as you dig.",
+        "clinks against your claws.",
+        "catches your eye amidst the spoil.",
+        "can't escape your keen senses.",
+        "drops into your waiting grasp.",
+    ]
+
     def self.build_lair type
         terrain = TERRAIN_TYPES[type]
         hoard = BIOMES[terrain.biomes.hoard.sample()]
@@ -225,6 +258,31 @@ module ProcGen
             discoverable: terrain.biomes.secondary,
             discovered: []
         }
+    end
+
+    def self.find_coin(condition, material, action)
+        value = condition.value * material.value
+        {message: "A #{condition[:condition]} #{material[:material]} coin #{action}.", value: value}
+    end
+
+    def self.get_find biome, rarity
+        treasure = biome[:treasure_types][rarity].sample
+
+        if treasure == :coin
+            type = :coin
+            coin = find_coin(COIN_CONDITION.sample(), COIN_MATERIAL.sample(), COIN_ACTIONS.sample())
+            value = 2 * coin.value
+            message = coin.message
+        elsif treasure == :gem
+            type = :gem
+            value = 1
+            message = "A gemstone gleams beneath your claws"
+        else
+            ype = :artifact
+            value = 1
+            message = "NOT YET IMPLEMENTED"
+        end
+        {message: message, type:type, value:value}
     end
 
     CONDITIONS = [
