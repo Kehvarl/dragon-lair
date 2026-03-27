@@ -141,18 +141,13 @@ class MyGame < Game
 
     def nap_clicked
         # Time passes. That should do something.
-        # Do we maybe lock the screen and let some stuff happen in the background
-        # If the user clicks they interrupt the nap before regaining full energy
-        #   We could pause all the buttons
-        #   Pop up a message
-        #   Show Energy ticking up
-        #   Run non-dragon stuff in the background
+        # TODO: 
+        #   Fast-forward time passing.
+        #   = This means we need some way to just say "X time passed" instead of simulating every tick
+        #   Things that might happen (These all look like agents to me)
         #   = Servants performing chores
         #   = Natural events
         #   = Bandit incursions -- Need to interrupt nap to resolve
-        #  Do We process this all realtime, or just  check the tables for interruption events,
-        #  Then just generate the correct resources and whatnot for the elapsed time
-        # For now, it's isntantaneous
         NAP_MESSAGES = [
             "The gold beneath you radiates a comforting warmth.",
             "You settle into the familiar weight of your treasure.",
