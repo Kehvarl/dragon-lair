@@ -278,7 +278,7 @@ module ProcGen
             value = 1
             message = "A gemstone gleams beneath your claws"
         else
-            ype = :artifact
+            type = :artifact
             value = 1
             message = "NOT YET IMPLEMENTED"
         end
