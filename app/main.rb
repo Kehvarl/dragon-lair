@@ -9,32 +9,32 @@ end
 def menu_tick args
     buttons = [
         {:type => :forest, primitives: [
-            {x:500, y:500, w:100, h:40, r:196, g:196, b:196}.solid!,
+            {x:500, y:500, w:100, h:40, r:164, g:216, b:164}.solid!,
             {x:500, y:500, w:100, h:40, r:0, g:0, b:0}.border!,
             {x:510, y:525, w:100, h:40, r:0, g:0, b:0, text: "Forest"}.label!,
         ]},
         {:type => :undersea, primitives: [
-            {x:500, y:450, w:100, h:40, r:196, g:196, b:196}.solid!,
+            {x:500, y:450, w:100, h:40, r:164, g:196, b:216}.solid!,
             {x:500, y:450, w:100, h:40, r:0, g:0, b:0}.border!,
             {x:510, y:475, w:100, h:40, r:0, g:0, b:0, text: "Undersea"}.label!,
         ]},
         {:type => :arctic, primitives: [
-            {x:500, y:400, w:100, h:40, r:196, g:196, b:196}.solid!,
+            {x:500, y:400, w:100, h:40, r:208, g:208, b:232}.solid!,
             {x:500, y:400, w:100, h:40, r:0, g:0, b:0}.border!,
             {x:510, y:425, w:100, h:40, r:0, g:0, b:0, text: "Arctic"}.label!,
         ]},
         {:type => :desert, primitives: [
-            {x:500, y:350, w:100, h:40, r:196, g:196, b:196}.solid!,
+            {x:500, y:350, w:100, h:40, r:196, g:164, b:128}.solid!,
             {x:500, y:350, w:100, h:40, r:0, g:0, b:0}.border!,
             {x:510, y:375, w:100, h:40, r:0, g:0, b:0, text: "Desert"}.label!,
         ]},
         {:type => :volcano, primitives: [
-            {x:500, y:300, w:100, h:40, r:196, g:196, b:196}.solid!,
+            {x:500, y:300, w:100, h:40, r:196, g:128, b:96}.solid!,
             {x:500, y:300, w:100, h:40, r:0, g:0, b:0}.border!,
             {x:510, y:325, w:100, h:40, r:0, g:0, b:0, text: "Volcano"}.label!,
         ]},
         {:type => :mountain, primitives: [
-            {x:500, y:250, w:100, h:40, r:196, g:196, b:196}.solid!,
+            {x:500, y:250, w:100, h:40, r:164, g:164, b:164}.solid!,
             {x:500, y:250, w:100, h:40, r:0, g:0, b:0}.border!,
             {x:510, y:275, w:100, h:40, r:0, g:0, b:0, text: "Mountain"}.label!,
         ]},
