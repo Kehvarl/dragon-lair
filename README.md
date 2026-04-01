@@ -13,4 +13,9 @@ Home Terrain Types:
 - Desert
 - High Mountain
 
+Different Dragons have different Terrain Types
+Differe Terriain Types have different gameplay features
+Treasure
+Ambient Effects
+Available Followers
 
