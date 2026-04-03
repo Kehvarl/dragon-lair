@@ -19,3 +19,4 @@ Treasure
 Ambient Effects  
 Available Followers  
 
+Might look into splitting follower messages off from ambients.
