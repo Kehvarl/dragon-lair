@@ -63,7 +63,7 @@ module ProcGen
             treasure_types: {
                 common: [:coin],
                 uncommon: [:gem],
-                rare: [:wood, :jewelry, :ring, :amulet, :tome]
+                rare: [:wood, :jewelry, :ring, :tome]
             },
             hoard_messages: [
                 "The hoard settles softly.",
@@ -86,7 +86,7 @@ module ProcGen
             treasure_types: {
                 common: [:coin],
                 uncommon: [:gem],
-                rare: [:wood, :jewelry, :ring, :amulet, :tome]
+                rare: [:wood, :jewelry, :ring, :tome]
             },
             follower_types: [:kobold, :goblin, :princess, :dryad],
             hoard_messages: [
@@ -109,7 +109,7 @@ module ProcGen
             treasure_types: {
                 common: [:coin],
                 uncommon: [:gem],
-                rare: [:wood, :jewelry, :ring, :amulet, :tome]
+                rare: [:wood, :jewelry, :ring, :tome]
             },
             follower_types: [:kobold, :goblin, :princess],
             hoard_messages: [
@@ -132,7 +132,7 @@ module ProcGen
             treasure_types: {
                 common: [:coin],
                 uncommon: [:gem],
-                rare: [:wood, :jewelry, :ring, :amulet, :tome]
+                rare: [:wood, :jewelry, :ring, :tome]
             },
             follower_types: [:kobold, :goblin, :princess],
             hoard_messages: [
@@ -155,7 +155,7 @@ module ProcGen
             treasure_types: {
                 common: [:coin],
                 uncommon: [:gem],
-                rare: [:jewelry, :ring, :amulet, :pearl]
+                rare: [:jewelry, :ring, :pearl]
             },
             follower_types: [:merfolk],
             hoard_messages: [
@@ -178,7 +178,7 @@ module ProcGen
             treasure_types: {
                 common: [:coin],
                 uncommon: [:gem],
-                rare: [:wood, :jewelry, :ring, :amulet, :tome]
+                rare: [:wood, :jewelry, :ring, :tome]
             },
             follower_types: [:kobold, :goblin],
             hoard_messages: [
@@ -201,7 +201,7 @@ module ProcGen
             treasure_types: {
                 common: [:coin],
                 uncommon: [:gem],
-                rare: [:wood, :jewelry, :ring, :amulet, :tome]
+                rare: [:wood, :jewelry, :ring, :tome]
             },
             follower_types: [:kobold, :goblin],
             hoard_messages: [
@@ -224,7 +224,7 @@ module ProcGen
             treasure_types: {
                 common: [:coin],
                 uncommon: [:gem],
-                rare: [:wood, :jewelry, :ring, :amulet, :tome]
+                rare: [:wood, :jewelry, :ring, :tome]
             },
             follower_types: [:kobold, :goblin],
             hoard_messages: [
@@ -247,7 +247,7 @@ module ProcGen
             treasure_types: {
                 common: [:coin],
                 uncommon: [:gem],
-                rare: [:wood, :jewelry, :ring, :amulet, :tome]
+                rare: [:wood, :jewelry, :ring, :tome]
             },
             hoard_messages: [
                 "The hoard settles softly.",
@@ -270,7 +270,7 @@ module ProcGen
             treasure_types: {
                 common: [:coin],
                 uncommon: [:gem],
-                rare: [:wood, :jewelry, :ring, :amulet, :tome]
+                rare: [:wood, :jewelry, :ring, :tome]
             },
             hoard_messages: [
                 "The hoard settles softly.",
@@ -293,7 +293,7 @@ module ProcGen
             treasure_types: {
                 common: [:coin],
                 uncommon: [:gem],
-                rare: [:wood, :jewelry, :ring, :amulet, :tome]
+                rare: [:wood, :jewelry, :ring, :tome]
             },
             hoard_messages: [
                 "The hoard settles softly.",
@@ -316,7 +316,7 @@ module ProcGen
             treasure_types: {
                 common: [:coin],
                 uncommon: [:gem],
-                rare: [:wood, :jewelry, :ring, :amulet, :tome]
+                rare: [:wood, :jewelry, :ring, :tome]
             },
             hoard_messages: [
                 "The hoard settles softly.",
@@ -339,7 +339,7 @@ module ProcGen
             treasure_types: {
                 common: [:coin],
                 uncommon: [:gem],
-                rare: [:wood, :jewelry, :ring, :amulet, :tome]
+                rare: [:wood, :jewelry, :ring, :tome]
             },
             hoard_messages: [
                 "The hoard settles softly.",
@@ -380,34 +380,106 @@ module ProcGen
             ],
             follower_types: [:kobold, :goblin],
         },
-
     }
 
-    COIN_CONDITION = [
-        {condition: "dull", value: 0.5},
-        {condition: "broken", value: 0.5},
-        {condition: "simple", value: 1.0},
-        {condition: "plain", value: 1.0},
-        {condition: "fine", value: 1.0},
-        {condition: "shiny", value: 1.5},
-        {condition: "gleaming", value: 1.5}
-    ]
+    FOLLOWERS = {
+        :kobold => {
+            :treasure_messages => [
+                "",
+                "",
+                ""
+            ],
+        },
+        :goblin => {
+            :treasure_messages => [
+                "",
+                "",
+                ""
+            ],
+        },
+        :princess => {
+            :treasure_messages => [
+                "",
+                "",
+                ""
+            ],
+        },
+        :dryad => {
+            :treasure_messages => [
+                "",
+                "",
+                ""
+            ],
+        },
+        :merfolk => {
+            :treasure_messages => [
+                "",
+                "",
+                ""
+            ],
+        },
+    }
 
-    COIN_MATERIAL = [
-        {material: "tin", value: 0.25},
-        {material: "copper", value: 0.5},
-        {material: "bronze", value: 1.0},
-        {material: "gold", value: 1.5},
-        {material: "platinum", value: 2.0},
-    ]
+    COIN = {
+        :condition => [
+            {condition: "dull", value: 0.5},
+            {condition: "broken", value: 0.5},
+            {condition: "simple", value: 1.0},
+            {condition: "plain", value: 1.0},
+            {condition: "fine", value: 1.0},
+            {condition: "shiny", value: 1.5},
+            {condition: "gleaming", value: 1.5}
+        ],
+        :material => [
+            {material: "tin", value: 0.25},
+            {material: "copper", value: 0.5},
+            {material: "bronze", value: 1.0},
+            {material: "silver", value: 1.25},
+            {material: "gold", value: 1.5},
+            {material: "platinum", value: 2.0},
+        ],
+        :action => [
+            "falls to the floor as you dig.",
+            "clinks against your claws.",
+            "catches your eye amidst the spoil.",
+            "can't escape your keen senses.",
+            "drops into your waiting grasp.",
+        ]
+    }
 
-    COIN_ACTIONS = [
-        "falls to the floor as you dig.",
-        "clinks against your claws.",
-        "catches your eye amidst the spoil.",
-        "can't escape your keen senses.",
-        "drops into your waiting grasp.",
-    ]
+    JEWELRY = {
+        :condition => [
+            {condition: "dull", value: 0.5},
+            {condition: "broken", value: 0.5},
+            {condition: "simple", value: 1.0},
+            {condition: "plain", value: 1.0},
+            {condition: "fine", value: 1.0},
+            {condition: "shiny", value: 1.5},
+            {condition: "gleaming", value: 1.5}
+        ],
+        :material => [
+            {material: "copper", value: 0.5},
+            {material: "brass", value: 1.0},
+            {material: "silver", value: 1.25},
+            {material: "gold", value: 1.5},
+            {material: "platinum", value: 2.0},
+        ],
+        :type => [
+            {type: "amulet", value: 1.0},
+            {type: "necklace", value: 1.0},
+            {type: "broach", value: 1.0},
+            {type: "earring", value: 1.0},
+            {type: "bracelet", value: 1.0},
+
+        ],
+        :action => [
+            "falls to the floor as you dig.",
+            "clinks against your claws.",
+            "catches your eye amidst the spoil.",
+            "can't escape your keen senses.",
+            "drops into your waiting grasp.",
+        ]
+    }
 
     def self.build_lair type
         terrain = TERRAIN_TYPES[type]
@@ -427,14 +499,24 @@ module ProcGen
         {message: "A #{condition[:condition]} #{material[:material]} coin #{action}.", value: value}
     end
 
+    def self.find_jewelry(condtion, type, material, action)
+        value = condition.value * material.value
+        {message: "A #{condition[:condition]} #{material[:material]} #{type:[:type]} #{action}.", value: value}
+    end
+
     def self.get_find biome, rarity
         treasure = biome[:treasure_types][rarity].sample
 
         if treasure == :coin
             type = :coin
-            coin = find_coin(COIN_CONDITION.sample(), COIN_MATERIAL.sample(), COIN_ACTIONS.sample())
+            coin = find_coin(COIN.condition.sample(), COIN.material.sample(), COIN.action.sample())
             value = 2 * coin.value
             message = coin.message
+        elsif treasure == :jewelry
+            type = :jewelry
+            jewelry = find_jewelry(JEWELRY.condition.sample(), JEWELRY.type.sample(), JEWELRY.material.sample(), JEWELRY.action.sample())
+            value = 2 * jewelry.value
+            message = jewelry.message
         elsif treasure == :gem
             type = :gem
             value = 1
@@ -446,111 +528,4 @@ module ProcGen
         end
         {message: message, type:type, value:value}
     end
-
-    CONDITIONS = [
-        "cracked",
-        "weathered",
-        "polished",
-        "dust-covered",
-        "chipped",
-        "remarkably well preserved"
-    ]
-
-    MATERIALS = [
-        "wood",
-        "pottery",
-        "jade",
-        "copper",
-        "obsidian",
-        "bone"
-    ]
-
-    TYPES = [
-        "ring",
-        "brooch",
-        "figurine",
-        "coin",
-        "idol",
-        "amulet",
-        "tablet"
-    ]
-
-    DETAILS = [
-        "depicting a coiled serpent",
-        "engraved with tiny runes",
-        "bearing a mark of unknown meaning",
-        "decorated with spirals and dots",
-        "showing a starburst",
-        "carved with an all-seeing eye"
-    ]
-
-    RULERS = [
-        "serpent king",
-        "sun priest",
-        "obsidian queen",
-        "keeper of the gate",
-        "lord of the deep halls"
-    ]
-
-    DISASTERS = [
-        "endless night",
-        "the devouring darkness",
-        "the silent plague",
-        "the cracking earth",
-        "the falling sun"
-    ]
-
-    RELICS = [
-        "the sacred gate",
-        "the golden idol",
-        "the heart of the mountain",
-        "the buried throne",
-        "the eternal flame"
-    ]
-
-    def self.generate_find
-        {
-            condition: CONDITIONS.sample,
-            material: MATERIALS.sample,
-            type: TYPES.sample,
-            detail: DETAILS.sample,
-            studied: false
-        }
-    end
-
-    def self.describe_find(find)
-        "A #{find[:condition]} #{find[:material]} #{find[:type]} #{find[:detail]}."
-    end
-
-    def self.generate_myth
-        {
-            ruler: RULERS.sample,
-            disaster: DISASTERS.sample,
-            relic: RELICS.sample
-        }
-    end
-
-    def self.generate_inscription(myth)
-        lines = [
-            "The #{myth[:ruler]} sealed away #{myth[:disaster]}.",
-            "The #{myth[:ruler]} guarded #{myth[:relic]}.",
-            "Only #{myth[:relic]} could stop #{myth[:disaster]}.",
-            "When #{myth[:relic]} falls, #{myth[:disaster]} returns.",
-            "The priests served the #{myth[:ruler]}.",
-            "#{myth[:relic]} lies beneath the temple."
-        ]
-
-        lines.sample
-    end
-
-    def self.damaged_inscription inscription
-        words = inscription.split
-
-        words.map! do |w|
-            rand < 0.25 ? "[...]" : w
-        end
-
-        words.join(" ")
-    end
-
 end
