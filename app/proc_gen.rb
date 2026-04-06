@@ -481,6 +481,37 @@ module ProcGen
         ]
     }
 
+    RING = {
+        :condition => [
+            {condition: "dull", value: 0.5},
+            {condition: "broken", value: 0.5},
+            {condition: "simple", value: 1.0},
+            {condition: "plain", value: 1.0},
+            {condition: "fine", value: 1.0},
+            {condition: "shiny", value: 1.5},
+            {condition: "gleaming", value: 1.5}
+        ],
+        :material => [
+            {material: "copper", value: 0.5},
+            {material: "brass", value: 1.0},
+            {material: "silver", value: 1.25},
+            {material: "gold", value: 1.5},
+            {material: "platinum", value: 2.0},
+        ],
+        :type => [
+            {type: "band", value: 1.0},
+            {type: "signet", value: 1.0},
+            {type: "cameo", value: 1.0},
+        ],
+        :action => [
+            "falls to the floor as you dig.",
+            "clinks against your claws.",
+            "catches your eye amidst the spoil.",
+            "can't escape your keen senses.",
+            "drops into your waiting grasp.",
+        ]
+    }
+
     def self.build_lair type
         terrain = TERRAIN_TYPES[type]
         hoard = BIOMES[terrain.biomes.hoard.sample()]
@@ -504,6 +535,12 @@ module ProcGen
         {message: "A #{condition[:condition]} #{material[:material]} #{type:[:type]} #{action}.", value: value}
     end
 
+
+    def self.find_ring(condtion, type, material, action)
+        value = condition.value * material.value
+        {message: "A #{condition[:condition]} #{material[:material]} #{type:[:type]} #{action}.", value: value}
+    end
+
     def self.get_find biome, rarity
         treasure = biome[:treasure_types][rarity].sample
 
@@ -517,6 +554,11 @@ module ProcGen
             jewelry = find_jewelry(JEWELRY.condition.sample(), JEWELRY.type.sample(), JEWELRY.material.sample(), JEWELRY.action.sample())
             value = 2 * jewelry.value
             message = jewelry.message
+        elsif treasure == :ring
+            type = :ring
+            ring = find_ring(RING.condition.sample(), RING.type.sample(), RING.material.sample(), RING.action.sample())
+            value = 2 * ring.value
+            message = ring.message
         elsif treasure == :gem
             type = :gem
             value = 1
