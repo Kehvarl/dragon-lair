@@ -421,23 +421,31 @@ module ProcGen
     }
 
     COIN = {
-        :condition => [
-            {condition: "dull", value: 0.5},
-            {condition: "broken", value: 0.5},
-            {condition: "simple", value: 1.0},
-            {condition: "plain", value: 1.0},
-            {condition: "fine", value: 1.0},
-            {condition: "shiny", value: 1.5},
-            {condition: "gleaming", value: 1.5}
-        ],
-        :material => [
-            {material: "tin", value: 0.25},
-            {material: "copper", value: 0.5},
-            {material: "bronze", value: 1.0},
-            {material: "silver", value: 1.25},
-            {material: "gold", value: 1.5},
-            {material: "platinum", value: 2.0},
-        ],
+        :features => {
+            :condition => [
+                {condition: "dull", value: 0.5},
+                {condition: "broken", value: 0.5},
+                {condition: "simple", value: 1.0},
+                {condition: "plain", value: 1.0},
+                {condition: "fine", value: 1.0},
+                {condition: "shiny", value: 1.5},
+                {condition: "gleaming", value: 1.5}
+            ],
+            :material => [
+                {material: "tin", value: 0.25},
+                {material: "copper", value: 0.5},
+                {material: "bronze", value: 1.0},
+                {material: "silver", value: 1.25},
+                {material: "gold", value: 1.5},
+                {material: "platinum", value: 2.0},
+            ],
+        },
+        template: ->(c, action) {
+            "A #{c.condition.condition} #{c.material.material} coin #{action}."
+        },
+        value: ->(c) {
+            c.condition.value * c.material.value
+        },
         :action => [
             "falls to the floor as you dig.",
             "clinks against your claws.",
@@ -448,30 +456,38 @@ module ProcGen
     }
 
     JEWELRY = {
-        :condition => [
-            {condition: "dull", value: 0.5},
-            {condition: "broken", value: 0.5},
-            {condition: "simple", value: 1.0},
-            {condition: "plain", value: 1.0},
-            {condition: "fine", value: 1.0},
-            {condition: "shiny", value: 1.5},
-            {condition: "gleaming", value: 1.5}
-        ],
-        :material => [
-            {material: "copper", value: 0.5},
-            {material: "brass", value: 1.0},
-            {material: "silver", value: 1.25},
-            {material: "gold", value: 1.5},
-            {material: "platinum", value: 2.0},
-        ],
-        :type => [
-            {type: "amulet", value: 1.0},
-            {type: "necklace", value: 1.0},
-            {type: "broach", value: 1.0},
-            {type: "earring", value: 1.0},
-            {type: "bracelet", value: 1.0},
+        :features => {
+            :condition => [
+                {condition: "dull", value: 0.5},
+                {condition: "broken", value: 0.5},
+                {condition: "simple", value: 1.0},
+                {condition: "plain", value: 1.0},
+                {condition: "fine", value: 1.0},
+                {condition: "shiny", value: 1.5},
+                {condition: "gleaming", value: 1.5}
+            ],
+            :material => [
+                {material: "copper", value: 0.5},
+                {material: "brass", value: 1.0},
+                {material: "silver", value: 1.25},
+                {material: "gold", value: 1.5},
+                {material: "platinum", value: 2.0},
+            ],
+            :type => [
+                {type: "amulet", value: 1.0},
+                {type: "necklace", value: 1.0},
+                {type: "broach", value: 1.0},
+                {type: "earring", value: 1.0},
+                {type: "bracelet", value: 1.0},
 
-        ],
+            ],
+        },
+        template: ->(j, action) {
+            "A #{j.condition.condition} #{j.material.material} #{j.type.type} #{action}."
+        },
+        value: ->(j) {
+            j.condition.value * j.material.value * j.type.value
+        },
         :action => [
             "falls to the floor as you dig.",
             "clinks against your claws.",
@@ -482,27 +498,35 @@ module ProcGen
     }
 
     RING = {
-        :condition => [
-            {condition: "dull", value: 0.5},
-            {condition: "broken", value: 0.5},
-            {condition: "simple", value: 1.0},
-            {condition: "plain", value: 1.0},
-            {condition: "fine", value: 1.0},
-            {condition: "shiny", value: 1.5},
-            {condition: "gleaming", value: 1.5}
-        ],
-        :material => [
-            {material: "copper", value: 0.5},
-            {material: "brass", value: 1.0},
-            {material: "silver", value: 1.25},
-            {material: "gold", value: 1.5},
-            {material: "platinum", value: 2.0},
-        ],
-        :type => [
-            {type: "band", value: 1.0},
-            {type: "signet", value: 1.0},
-            {type: "cameo", value: 1.0},
-        ],
+        :features => {
+            :condition => [
+                {condition: "dull", value: 0.5},
+                {condition: "broken", value: 0.5},
+                {condition: "simple", value: 1.0},
+                {condition: "plain", value: 1.0},
+                {condition: "fine", value: 1.0},
+                {condition: "shiny", value: 1.5},
+                {condition: "gleaming", value: 1.5}
+            ],
+            :material => [
+                {material: "copper", value: 0.5},
+                {material: "brass", value: 1.0},
+                {material: "silver", value: 1.25},
+                {material: "gold", value: 1.5},
+                {material: "platinum", value: 2.0},
+            ],
+            :type => [
+                {type: "band", value: 1.0},
+                {type: "signet", value: 1.0},
+                {type: "cameo", value: 1.0},
+            ],
+        },
+        template: ->(r, action) {
+            "A #{r.condition.condition} #{r.material.material} #{r.type.type} #{action}."
+        },
+        value: ->(r) {
+            r.condition.value * r.material.value * r.type.value
+        },
         :action => [
             "falls to the floor as you dig.",
             "clinks against your claws.",
@@ -525,49 +549,39 @@ module ProcGen
         }
     end
 
-    def self.find_coin(condition, material, action)
-        value = condition.value * material.value
-        {message: "A #{condition[:condition]} #{material[:material]} coin #{action}.", value: value}
-    end
+    def self.build_item type
+        features = {}
 
-    def self.find_jewelry(condtion, type, material, action)
-        value = condition.value * material.value
-        {message: "A #{condition[:condition]} #{material[:material]} #{type:[:type]} #{action}.", value: value}
-    end
-
-
-    def self.find_ring(condtion, type, material, action)
-        value = condition.value * material.value
-        {message: "A #{condition[:condition]} #{material[:material]} #{type:[:type]} #{action}.", value: value}
+        type.features.each do |key, list|
+            features[key] = list.sample
+        end
+        action = type.action.sample
+        {message: type.template.call(features, action), value: type.value.call(features)}
     end
 
     def self.get_find biome, rarity
         treasure = biome[:treasure_types][rarity].sample
 
         if treasure == :coin
+            item = build_item(COIN)
             type = :coin
-            coin = find_coin(COIN.condition.sample(), COIN.material.sample(), COIN.action.sample())
-            value = 2 * coin.value
-            message = coin.message
         elsif treasure == :jewelry
             type = :jewelry
-            jewelry = find_jewelry(JEWELRY.condition.sample(), JEWELRY.type.sample(), JEWELRY.material.sample(), JEWELRY.action.sample())
-            value = 2 * jewelry.value
-            message = jewelry.message
+            item = build_item(JEWELRY)
         elsif treasure == :ring
             type = :ring
-            ring = find_ring(RING.condition.sample(), RING.type.sample(), RING.material.sample(), RING.action.sample())
-            value = 2 * ring.value
-            message = ring.message
+            item = build_item(RING)
         elsif treasure == :gem
             type = :gem
             value = 1
             message = "A gemstone gleams beneath your claws"
+            return {message: message, type: type, value: value}
         else
             type = :artifact
             value = 1
             message = "NOT YET IMPLEMENTED"
+            return {message: message, type: type, value: value}
         end
-        {message: message, type:type, value:value}
+        {message: item.message, type:type, value:item.value}
     end
 end
