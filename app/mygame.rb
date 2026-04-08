@@ -41,7 +41,7 @@ class MyGame < Game
         create_button :scratch, 600, 500, "Scratch"
         @buttons[:scratch].location =  [:hoard]
         highlight_button :scratch, 0
-        auto_highlight :scratch, 100, 20
+        auto_highlight :scratch, 100, 100
         reveal_button :scratch
 
         create_actor :hoard_ambient, ticks_total = (600 + rand(120)), location=:hoard
@@ -104,7 +104,7 @@ class MyGame < Game
                 # Need a way to scope this to the finds we can get from a biome
                 # Maybe all biomes have gold and gems, and we just need a generator for artifacts
                 r = rand
-                if r < 0.3 and unlocked?(:artifacts)
+                if r < 0.1 and unlocked?(:artifacts)
                 elsif r > 0.4 and unlocked?(:gems)
                     f = ProcGen.get_find(@lair.hoard, :uncommon)
                     generate_resource :gems
@@ -148,14 +148,14 @@ class MyGame < Game
         #   = Servants performing chores
         #   = Natural events
         #   = Bandit incursions -- Need to interrupt nap to resolve
-        NAP_MESSAGES = [
+        nap_messages = [
             "The gold beneath you radiates a comforting warmth.",
             "You settle into the familiar weight of your treasure.",
             "Coins shift softly as you relax.",
             "Your breathing slows as you rest atop your hoard."
         ]
 
-        add_message :log, NAP_MESSAGES.sample()
+        add_message :log, nap_messages.sample()
         set_resource :energy, 100
     end
 
@@ -181,7 +181,7 @@ class MyGame < Game
     end
 
     def venture_unlocked
-        add_message :log, "The desire to expore beyond your cave grows nearly unbearable.  The boulder blockng the entrance is easily removed by your great might, and the fresh air rushes in; brining delightful new scents."
+        add_message :log, "The desire to explore beyond your cave grows nearly unbearable.  The boulder blocking the entrance is easily removed by your great might, and the fresh air rushes in; brining delightful new scents."
         reveal_button :venture
     end
 
