@@ -334,7 +334,7 @@ module ProcGen
             ],
             follower_types: [:kobold, :goblin],
         },
-        :lave_cave => {
+        :lava_cave => {
             ambient_color: { r: 180, g: 160, b: 100 },
             treasure_types: {
                 common: [:coin],
@@ -582,6 +582,6 @@ module ProcGen
             message = "NOT YET IMPLEMENTED"
             return {message: message, type: type, value: value}
         end
-        {message: item.message, type:type, value:item.value}
+        {message: item.message, type:type, value:item.value.clamp(1,1000)}
     end
 end
