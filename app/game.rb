@@ -405,18 +405,26 @@ class Game
 # generate_resource
 # Increases a resource value.
 # ------------------------------------------------------------
-    def generate_resource(resource, qty=1, show=true)
+    def generate_resource(resource, qty=1, show=true, limit=nil)
         ensure_resource(resource, show)
-        @values[resource].value+= qty
+        if limit and (values[resource].value + qty) >= limit
+            @values[resource].value = limit
+        else
+            @values[resource].value+= qty
+        end
     end
 
 # ------------------------------------------------------------
 # set_resource
 # Sets a resource to an explicit value.
 # ------------------------------------------------------------
-    def set_resource(resource, qty, show=true)
+    def set_resource(resource, qty, show=true, limit=nil)
         ensure_resource(resource, show)
-        @values[resource].value = qty
+        if limit and limit <= qty
+            @values[resource].value = limit
+        else
+            @values[resource].value = qty
+        end
     end
 
 # ------------------------------------------------------------
