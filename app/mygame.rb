@@ -27,8 +27,11 @@ class MyGame < Game
 
         set_resource :reputation, 0
         set_resource :energy, 100
+        set_resource :hoard_size, 0, show=false
         set_resource :gold, 0
         set_resource :gems, 0, show=false
+        set_resource :max_gold, 1000, show=false
+        set_resource :max_followers, 1, show=false
 
         create_actor :energy, ticks_total=120, location=:hoard
     end
@@ -111,9 +114,11 @@ class MyGame < Game
                     add_message :log, @lair.hoard.scratch_messages.sample() #Replace with Gem messages later
                 else
                     f = ProcGen.get_find(@lair.hoard, :common)
-                    generate_resource :gold, f.value.floor.clamp(1,5) # Create a generate_gold helper that generated more gold based on conditions. Hoard size, time elapsed, something. Or maybe special artifacts.
+                    generate_resource :gold, f.value.floor.clamp(1,50), get_resource(:max_gold) # Create a generate_gold helper that generated more gold based on conditions. Hoard size, time elapsed, something. Or maybe special artifacts.
                     add_message :log, f.message #@lair.hoard.scratch_messages.sample()
                 end
+
+                generate_resource :hoard_size, 1 + (rand < 0.2 ? 1 : 0)  # increase hoard size slightly
 
                 restart_highlight :scratch, 0
                 # Need a way to speed this up over time.  Maybe some more unlocks or actors

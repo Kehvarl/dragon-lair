@@ -582,6 +582,6 @@ module ProcGen
             message = "NOT YET IMPLEMENTED"
             return {message: message, type: type, value: value}
         end
-        {message: item.message, type:type, value:item.value.clamp(1,1000)}
+        {message: item.message, type:type, value:item.value}
     end
 end
