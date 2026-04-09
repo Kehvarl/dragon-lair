@@ -65,6 +65,10 @@ class MyGame < Game
         create_unlock :gems
         create_unlock :artifacts
 
+        create_unlock :expand_hoard
+        create_unlock :add_lair
+        create_unlock :add_special
+
     end
 
     def hoard_ambient_trigger
@@ -144,6 +148,23 @@ class MyGame < Game
         # size > venture_size, start venture countdown
         # size > lair_size, reveal/activate Add-Lair button to increase follower limit
         # size > special:  Unlock special rooms (library unlocks Tomes, Museum unlocks artifacts)
+    end
+
+    def expand_hoard_unlocked
+        # Message about hoard size.  Maybe we hold off until we run close to the gold limit
+        # Show Expand_Hoard button
+    end
+
+    def add_lair_unlocked
+        # Show Add_Lair button to add space for new max_followers
+        # Start Follower Random Encounter Timer
+    end
+
+    def add_special_unlocked
+        # Show Buttons for special rooms (Or just one, or just unlock the ability to reveal them)
+        # Library
+        # Museum
+        # Other.
     end
 
     def check_reputation
