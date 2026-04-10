@@ -62,6 +62,10 @@ class MyGame < Game
         highlight_button :nap, 100
         reveal_button :nap
 
+        create_button :expand_hoard, 600, 350, "Expand Treasury"
+        @buttons[:expand_hoard].location =  [:hoard]
+        highlight_button :expand_hoard, 100
+
         create_unlock :gems
         create_unlock :artifacts
 
