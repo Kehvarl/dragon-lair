@@ -57,14 +57,18 @@ class MyGame < Game
         create_actor :venture, ticks_total = 3600, location=:hoard  #60 ticks per second, 2 minutes.
         create_unlock :venture
 
-        create_button :nap, 600, 300, "Nap"
+        create_button :nap, 600, 250, "Nap"
         @buttons[:nap].location =  [:hoard]
         highlight_button :nap, 100
         reveal_button :nap
 
-        create_button :expand_hoard, 600, 350, "Expand Treasury"
-        @buttons[:expand_hoard].location =  [:hoard]
-        highlight_button :expand_hoard, 100
+        create_button :deepen_treasury, 600, 350, "Deepen Treasury"
+        @buttons[:deepen_treasury].location =  [:hoard]
+        highlight_button :deepen_treasury, 100
+
+        create_button :add_alcove, 600, 300, "Add Alcove"
+        @buttons[:add_alcove].location =  [:hoard]
+        highlight_button :add_alcove, 100
 
         create_unlock :gems
         create_unlock :artifacts
@@ -202,6 +206,20 @@ class MyGame < Game
         add_message :log, nap_messages.sample()
         set_resource :energy, 100
     end
+
+    def deepen_treasury_clicked
+        if use_resource(hoard_size, 10)
+            # Increase max gold
+        end
+    end
+
+    def add_alcove_clicked
+        if use_resource(hoard_size, 15)
+            # Increase max gold
+            # Increase Follower limit
+        end
+    end
+
 
     # One-shot actor set for about 2 minutes.
     def venture_trigger
