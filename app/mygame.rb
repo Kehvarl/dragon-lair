@@ -80,7 +80,6 @@ class MyGame < Game
     end
 
     def hoard_ambient_trigger
-        # Maybe these get a custom color
         add_message :log, @lair.hoard.hoard_messages.sample(), @lair.hoard.ambient_color
 
         restart_actor :hoard_ambient, ticks_total = (600 + rand(120))
