@@ -70,12 +70,12 @@ class MyGame < Game
         @buttons[:add_alcove].location =  [:hoard]
         highlight_button :add_alcove, 100
 
-        create_unlock :gems
-        create_unlock :artifacts
+        create_unlock :gems         # Start finding gems after... ?
+        create_unlock :artifacts    # Start finding artifacts after ?
 
-        create_unlock :expand_hoard
-        create_unlock :add_lair
-        create_unlock :add_special
+        create_unlock :expand_hoard # When we've first dug out enough space for more gold storage
+        create_unlock :add_lair     # When we first can add space for followers
+        create_unlock :add_special  # Special Rooms unlock when something happens.
 
     end
 
@@ -113,26 +113,27 @@ class MyGame < Game
         # = Gems
         # = Certain types of artifact (metal weapons, rings, magic things)
 
-
         if button_highlight_full?(:scratch)
             if use_resource(:energy, 9 + rand(4))
-                # Need a way to scope this to the finds we can get from a biome
-                # Maybe all biomes have gold and gems, and we just need a generator for artifacts
                 r = rand
                 if r < 0.1 and unlocked?(:artifacts)
+                    # No artifacts implemented yet
                 elsif r > 0.4 and unlocked?(:gems)
-                    f = ProcGen.get_find(@lair.hoard, :uncommon)
-                    generate_resource :gems
+                    # TODO: Properly implement either gems or uncommon finds.
+                    f = ProcGen.get_find(@lair.hoard, :uncommon) #Generate then throw away
+                    generate_resource :gems # So we find something special, but that just adds some gems?
                     add_message :log, @lair.hoard.scratch_messages.sample() #Replace with Gem messages later
                 else
                     f = ProcGen.get_find(@lair.hoard, :common)
-                    generate_resource :gold, f.value.floor.clamp(1,50), get_resource(:max_gold) # Create a generate_gold helper that generated more gold based on conditions. Hoard size, time elapsed, something. Or maybe special artifacts.
-                    add_message :log, f.message #@lair.hoard.scratch_messages.sample()
+                    #TODO: Create a generate_gold helper that generates more gold based on conditions.
+                    #Hoard size, time elapsed, something. Or maybe special artifacts.
+                    generate_resource :gold, f.value.floor.clamp(1,50), get_resource(:max_gold)
+                    add_message :log, f.message
                 end
 
                 generate_resource :hoard_size, 1 + (rand < 0.2 ? 1 : 0)  # increase hoard size slightly
 
-                check_hoard_size
+                check_hoard_size()
 
                 restart_highlight :scratch, 0
                 # Need a way to speed this up over time.  Maybe some more unlocks or actors
@@ -189,7 +190,7 @@ class MyGame < Game
 
     def nap_clicked
         # Time passes. That should do something.
-        # TODO: 
+        # TODO:
         #   Fast-forward time passing.
         #   = This means we need some way to just say "X time passed" instead of simulating every tick
         #   Things that might happen (These all look like agents to me)
@@ -282,4 +283,3 @@ class MyGame < Game
     end
 
 end
-
