@@ -54,6 +54,7 @@ class MyGame < Game
         highlight_button :venture, 0
         auto_highlight :venture, 100, (rand(10) + 15) # Predictable, but changes game to game.
 
+        # We may be converting this from pure time to some other in-game event.
         create_actor :venture, ticks_total = 3600, location=:hoard  #60 ticks per second, 2 minutes.
         create_unlock :venture
 
