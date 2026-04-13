@@ -137,6 +137,7 @@ class MyGame < Game
 
                 restart_highlight :scratch, 0
                 # Need a way to speed this up over time.  Maybe some more unlocks or actors
+                # Or just calculate a faster highlight based on something.
             else
                 add_message :log, "You're far too tired to do that right now."
             end
