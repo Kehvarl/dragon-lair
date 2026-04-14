@@ -99,10 +99,6 @@ class MyGame < Game
         end
     end
 
-    def scratch_tick
-        #Button auto highlights so we don't need this _yet_.
-    end
-
     def scratch_clicked
         # Scratch at the cave walls
         # Make the space bigger (We don't track this yet)
