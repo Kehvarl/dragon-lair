@@ -64,6 +64,12 @@ BIOMES ={
             uncommon: [:gem],
             rare: [:wood, :jewelry, :ring, :tome]
         },
+        nap_messages: [
+            "The gold beneath you radiates a comforting warmth.",
+            "You settle into the familiar weight of your treasure.",
+            "Coins shift softly as you relax.",
+            "Your breathing slows as you rest atop your hoard."
+        ],
         hoard_messages: [
             "The hoard settles softly.",
             "A faint clink echoes through the cave.",
@@ -88,6 +94,12 @@ BIOMES ={
             rare: [:wood, :jewelry, :ring, :tome]
         },
         follower_types: [:kobold, :goblin, :princess, :dryad],
+        nap_messages: [
+            "The gold beneath you radiates a comforting warmth.",
+            "You settle into the familiar weight of your treasure.",
+            "Coins shift softly as you relax.",
+            "Your breathing slows as you rest atop your hoard."
+        ],
         hoard_messages: [
             "The hoard settles softly.",
             "A faint clink echoes through the cave.",
@@ -111,6 +123,12 @@ BIOMES ={
             rare: [:wood, :jewelry, :ring, :tome]
         },
         follower_types: [:kobold, :goblin, :princess],
+        nap_messages: [
+            "The gold beneath you radiates a comforting warmth.",
+            "You settle into the familiar weight of your treasure.",
+            "Coins shift softly as you relax.",
+            "Your breathing slows as you rest atop your hoard."
+        ],
         hoard_messages: [
             "The hoard settles softly.",
             "A faint clink echoes through the cave.",
@@ -134,6 +152,12 @@ BIOMES ={
             rare: [:wood, :jewelry, :ring, :tome]
         },
         follower_types: [:kobold, :goblin, :princess],
+        nap_messages: [
+            "The gold beneath you radiates a comforting warmth.",
+            "You settle into the familiar weight of your treasure.",
+            "Coins shift softly as you relax.",
+            "Your breathing slows as you rest atop your hoard."
+        ],
         hoard_messages: [
             "The hoard settles softly.",
             "A faint clink echoes through the cave.",
@@ -157,6 +181,12 @@ BIOMES ={
             rare: [:jewelry, :ring, :pearl]
         },
         follower_types: [:merfolk],
+        nap_messages: [
+            "The gold beneath you radiates a comforting warmth.",
+            "You settle into the familiar weight of your treasure.",
+            "Coins shift softly as you relax.",
+            "Your breathing slows as you rest atop your hoard."
+        ],
         hoard_messages: [
             "The hoard settles softly.",
             "A faint clink echoes through the cave.",
@@ -180,6 +210,12 @@ BIOMES ={
             rare: [:wood, :jewelry, :ring, :tome]
         },
         follower_types: [:kobold, :goblin],
+        nap_messages: [
+            "The gold beneath you radiates a comforting warmth.",
+            "You settle into the familiar weight of your treasure.",
+            "Coins shift softly as you relax.",
+            "Your breathing slows as you rest atop your hoard."
+        ],
         hoard_messages: [
             "The hoard settles softly.",
             "A faint clink echoes through the cave.",
@@ -203,6 +239,12 @@ BIOMES ={
             rare: [:wood, :jewelry, :ring, :tome]
         },
         follower_types: [:kobold, :goblin],
+        nap_messages: [
+            "The gold beneath you radiates a comforting warmth.",
+            "You settle into the familiar weight of your treasure.",
+            "Coins shift softly as you relax.",
+            "Your breathing slows as you rest atop your hoard."
+        ],
         hoard_messages: [
             "The hoard settles softly.",
             "The shifting tide causes the water in your cavern to squeeze you soothingly.",
@@ -226,6 +268,12 @@ BIOMES ={
             rare: [:wood, :jewelry, :ring, :tome]
         },
         follower_types: [:kobold, :goblin],
+        nap_messages: [
+            "The gold beneath you radiates a comforting warmth.",
+            "You settle into the familiar weight of your treasure.",
+            "Coins shift softly as you relax.",
+            "Your breathing slows as you rest atop your hoard."
+        ],
         hoard_messages: [
             "The hoard settles softly.",
             "The shifting tide causes the water in your cavern to squeeze you soothingly.",
@@ -248,6 +296,12 @@ BIOMES ={
             uncommon: [:gem],
             rare: [:wood, :jewelry, :ring, :tome]
         },
+        nap_messages: [
+            "The gold beneath you radiates a comforting warmth.",
+            "You settle into the familiar weight of your treasure.",
+            "Coins shift softly as you relax.",
+            "Your breathing slows as you rest atop your hoard."
+        ],
         hoard_messages: [
             "The hoard settles softly.",
             "A faint clink echoes through the cave.",
@@ -271,6 +325,12 @@ BIOMES ={
             uncommon: [:gem],
             rare: [:wood, :jewelry, :ring, :tome]
         },
+        nap_messages: [
+            "The gold beneath you radiates a comforting warmth.",
+            "You settle into the familiar weight of your treasure.",
+            "Coins shift softly as you relax.",
+            "Your breathing slows as you rest atop your hoard."
+        ],
         hoard_messages: [
             "The hoard settles softly.",
             "A faint clink echoes through the cave.",
@@ -294,6 +354,12 @@ BIOMES ={
             uncommon: [:gem],
             rare: [:wood, :jewelry, :ring, :tome]
         },
+        nap_messages: [
+            "The gold beneath you radiates a comforting warmth.",
+            "You settle into the familiar weight of your treasure.",
+            "Coins shift softly as you relax.",
+            "Your breathing slows as you rest atop your hoard."
+        ],
         hoard_messages: [
             "The hoard settles softly.",
             "A faint clink echoes through the cave.",
@@ -317,6 +383,12 @@ BIOMES ={
             uncommon: [:gem],
             rare: [:wood, :jewelry, :ring, :tome]
         },
+        nap_messages: [
+            "The gold beneath you radiates a comforting warmth.",
+            "You settle into the familiar weight of your treasure.",
+            "Coins shift softly as you relax.",
+            "Your breathing slows as you rest atop your hoard."
+        ],
         hoard_messages: [
             "The hoard settles softly.",
             "A faint clink echoes through the cave.",
@@ -340,6 +412,12 @@ BIOMES ={
             uncommon: [:gem],
             rare: [:wood, :jewelry, :ring, :tome]
         },
+        nap_messages: [
+            "The gold beneath you radiates a comforting warmth.",
+            "You settle into the familiar weight of your treasure.",
+            "Coins shift softly as you relax.",
+            "Your breathing slows as you rest atop your hoard."
+        ],
         hoard_messages: [
             "The hoard settles softly.",
             "A faint clink echoes through the cave.",
@@ -363,6 +441,12 @@ BIOMES ={
             uncommon: [:gem],
             rare: [:wood, :jewelry, :ring, :amulet, :tome]
         },
+        nap_messages: [
+            "The gold beneath you radiates a comforting warmth.",
+            "You settle into the familiar weight of your treasure.",
+            "Coins shift softly as you relax.",
+            "Your breathing slows as you rest atop your hoard."
+        ],  
         hoard_messages: [
             "The hoard settles softly.",
             "A faint clink echoes through the cave.",

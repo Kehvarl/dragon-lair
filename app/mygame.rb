@@ -194,14 +194,8 @@ class MyGame < Game
         #   = Servants performing chores
         #   = Natural events
         #   = Bandit incursions -- Need to interrupt nap to resolve
-        nap_messages = [
-            "The gold beneath you radiates a comforting warmth.",
-            "You settle into the familiar weight of your treasure.",
-            "Coins shift softly as you relax.",
-            "Your breathing slows as you rest atop your hoard."
-        ]
 
-        add_message :log, nap_messages.sample()
+        add_message :log, @lair.nap_messages.sample()
         set_resource :energy, 100
     end
 
