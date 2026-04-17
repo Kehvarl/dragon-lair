@@ -54,7 +54,8 @@ class MyGame < Game
         highlight_button :venture, 0
         auto_highlight :venture, 100, (rand(10) + 15) # Predictable, but changes game to game.
 
-        # We may be converting this from pure time to some other in-game event.
+        # We may be converting this from pure time to some other in-game event,
+        # eg: after a certain number of naps, sstart the countdown.
         create_actor :venture, ticks_total = 3600, location=:hoard  #60 ticks per second, 2 minutes.
         create_unlock :venture
 
@@ -75,7 +76,7 @@ class MyGame < Game
         create_unlock :artifacts    # Start finding artifacts after ?
 
         create_unlock :expand_hoard # When we've first dug out enough space for more gold storage
-        create_unlock :add_lair     # When we first can add space for followers
+        create_unlock :add_alcove     # When we first can add space for followers
         create_unlock :add_special  # Special Rooms unlock when something happens.
 
     end
@@ -149,8 +150,12 @@ class MyGame < Game
     end
 
     def check_hoard_size
+        size = get_resource(:hoard_size)
         # Trigger some unlocks based on size
         # size > expand_size, reveal expand button (increase gold limit)
+        if size > 15 and not unlocked?(:add_alcove)
+          unlock(:add_alcove)
+        end
         # size > venture_size, start venture countdown
         # size > lair_size, reveal/activate Add-Lair button to increase follower limit
         # size > special:  Unlock special rooms (library unlocks Tomes, Museum unlocks artifacts)
@@ -161,8 +166,9 @@ class MyGame < Game
         # Show Expand_Hoard button
     end
 
-    def add_lair_unlocked
+    def add_alcove_unlocked
         # Show Add_Lair button to add space for new max_followers
+        reveal_buttone(:add_alcove)
         # Start Follower Random Encounter Timer
     end
 
@@ -203,6 +209,10 @@ class MyGame < Game
         if use_resource(hoard_size, 10)
             # Increase max gold
         end
+    end
+
+    def add_alcove_tick
+      set_highlight(:add_alcove, (get_resource(:hoard_size) / 15))
     end
 
     def add_alcove_clicked
