@@ -405,7 +405,7 @@ class Game
 # generate_resource
 # Increases a resource value.
 # ------------------------------------------------------------
-    def generate_resource(resource, qty=1, show=true, limit=nil)
+    def generate_resource(resource, qty=1, limit=nil, show=true)
         ensure_resource(resource, show)
         if limit and (values[resource].value + qty) >= limit
             @values[resource].value = limit
