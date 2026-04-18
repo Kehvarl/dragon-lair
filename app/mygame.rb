@@ -153,22 +153,28 @@ class MyGame < Game
         size = get_resource(:hoard_size)
         # Trigger some unlocks based on size
         # size > expand_size, reveal expand button (increase gold limit)
-        if size > 15 and not unlocked?(:add_alcove)
-          unlock(:add_alcove)
+        if size > 10 and not unlocked?(:expand_hoard)
+          unlock(:expand_hoard)
         end
         # size > venture_size, start venture countdown
         # size > lair_size, reveal/activate Add-Lair button to increase follower limit
+        if size > 15 and not unlocked?(:add_alcove)
+          unlock(:add_alcove)
+        end
         # size > special:  Unlock special rooms (library unlocks Tomes, Museum unlocks artifacts)
     end
 
     def expand_hoard_unlocked
         # Message about hoard size.  Maybe we hold off until we run close to the gold limit
+        add_message :log, "Your hoard has grown cramped. You could deepen the treasury."
+        reveal_button(:deepen_treasury)
         # Show Expand_Hoard button
     end
 
     def add_alcove_unlocked
         # Show Add_Lair button to add space for new max_followers
-        reveal_buttone(:add_alcove)
+        add_message :log, "You could add space for a follower."
+        reveal_button(:add_alcove)
         # Start Follower Random Encounter Timer
     end
 
@@ -205,10 +211,17 @@ class MyGame < Game
         set_resource :energy, 100
     end
 
+    def deepen_treasury_tick
+      set_highlight(:deepen_treasury, (get_resource(:hoard_size) / 10))
+    end
+
     def deepen_treasury_clicked
-        if use_resource(hoard_size, 10)
-            # Increase max gold
-        end
+      if use_resource(:hoard_size, 10)
+          generate_resource :max_gold, 250
+          add_message :log, "You carve the treasury deeper into the stone. Your hoard can now hold more gold."
+      else
+          add_message :log, "Your don't have enough space to expand your treasury."
+      end
     end
 
     def add_alcove_tick
@@ -216,7 +229,7 @@ class MyGame < Game
     end
 
     def add_alcove_clicked
-        if use_resource(hoard_size, 15)
+        if use_resource(:hoard_size, 15)
             # Increase max gold
             # Increase Follower limit
         end
