@@ -395,7 +395,7 @@ class Game
 #
 # Resources track value, label, and visibility.
 # ------------------------------------------------------------
-    def ensure_resource(resource, show = true)
+    def ensure_resource(resource, show: true)
         if !@values.key?(resource)
             @values[resource] = {value: 0, label: resource.to_s.capitalize, show: show}
         end
@@ -405,9 +405,9 @@ class Game
 # generate_resource
 # Increases a resource value.
 # ------------------------------------------------------------
-    def generate_resource(resource, qty=1, limit=nil, show=true)
-        ensure_resource(resource, show)
-        if limit and (values[resource].value + qty) >= limit
+    def generate_resource(resource, qty=1, show: true, limit: nil)
+        ensure_resource(resource, show: show)
+        if limit and (@values[resource].value + qty) >= limit
             @values[resource].value = limit
         else
             @values[resource].value+= qty
@@ -418,8 +418,8 @@ class Game
 # set_resource
 # Sets a resource to an explicit value.
 # ------------------------------------------------------------
-    def set_resource(resource, qty, show=true, limit=nil)
-        ensure_resource(resource, show)
+    def set_resource(resource, qty, show: true, limit: nil)
+        ensure_resource(resource, show: show)
         if limit and limit <= qty
             @values[resource].value = limit
         else

@@ -1,0 +1,21 @@
+* EXCEPTION:
+* ERROR - :sample method missing on ~NilClass~.
+
+#+begin_src ~NilClass#inspect~
+nil
+#+end_src ~NilClass#inspect~
+
+
+
+The method named
+  :sample
+doesn't exist on [NilClass, NilClassFalseClass].
+
+(suggestions above)
+** Backtrace:
+*** app/mygame.rb:210:in nap_clicked
+*** app/game.rb:59:in handle_mouse_click
+*** app/game.rb:57:in handle_mouse_click
+*** app/game.rb:116:in tick
+*** app/main.rb:69:in game_tick
+*** app/main.rb:90:in tick

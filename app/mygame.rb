@@ -27,11 +27,11 @@ class MyGame < Game
 
         set_resource :reputation, 0
         set_resource :energy, 100
-        set_resource :hoard_size, 0, show=false
+        set_resource :hoard_size, 0, show: false
         set_resource :gold, 0
-        set_resource :gems, 0, show=false
-        set_resource :max_gold, 1000, show=false
-        set_resource :max_followers, 1, show=false
+        set_resource :gems, 0, show: false
+        set_resource :max_gold, 1000, show: false
+        set_resource :max_followers, 1, show: false
 
         create_actor :energy, ticks_total=120, location=:hoard
     end
@@ -124,8 +124,13 @@ class MyGame < Game
                     f = ProcGen.get_find(@lair.hoard, :common)
                     #TODO: Create a generate_gold helper that generates more gold based on conditions.
                     #Hoard size, time elapsed, something. Or maybe special artifacts.
-                    generate_resource :gold, f.value.floor.clamp(1,50), get_resource(:max_gold)
-                    add_message :log, f.message
+                    gold_limit = get_resource(:max_gold)
+                    if get_resource_resou(:gold) > = gold_limit
+                      add_message :log, "Your treasury is too full to add more gold to it."
+                    else
+                      add_message :log, f.message
+                      generate_resource :gold, f.value.floor.clamp(1,50), limit: gold_limit
+                    end
                 end
 
                 generate_resource :hoard_size, 1 + (rand < 0.2 ? 1 : 0)  # increase hoard size slightly
@@ -207,12 +212,12 @@ class MyGame < Game
         #   = Natural events
         #   = Bandit incursions -- Need to interrupt nap to resolve
 
-        add_message :log, @lair.nap_messages.sample()
+        add_message :log, @lair.hoard.nap_messages.sample()
         set_resource :energy, 100
     end
 
     def deepen_treasury_tick
-      set_highlight(:deepen_treasury, (get_resource(:hoard_size) / 10))
+      set_highlight(:deepen_treasury, (get_resource(:hoard_size) / 10)*100)
     end
 
     def deepen_treasury_clicked
@@ -225,7 +230,7 @@ class MyGame < Game
     end
 
     def add_alcove_tick
-      set_highlight(:add_alcove, (get_resource(:hoard_size) / 15))
+      set_highlight(:add_alcove, (get_resource(:hoard_size) / 15)*100)
     end
 
     def add_alcove_clicked
