@@ -102,7 +102,7 @@ class MyGame < Game
 
     def scratch_clicked
         # Scratch at the cave walls
-        # Make the space bigger (We don't track this yet)
+        # Make the space bigger
         # = More space for treasure
         # = Space for servants or special areas
         # Discover burried treasures
