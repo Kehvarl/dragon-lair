@@ -118,14 +118,15 @@ class MyGame < Game
                 elsif r > 0.4 and unlocked?(:gems)
                     # TODO: Properly implement either gems or uncommon finds.
                     f = ProcGen.get_find(@lair.hoard, :uncommon) #Generate then throw away
-                    generate_resource :gems # So we find something special, but that just adds some gems?
-                    add_message :log, @lair.hoard.scratch_messages.sample() #Replace with Gem messages later
+                    generate_resource :gems, 1 + (rand < 0.2 ? 1 : 0)
+                    #add_message :log, @lair.hoard.scratch_messages.sample() #Replace with Gem messages later
+                    add_message :log, "You uncover a glittering gem embedded in the rock."
                 else
                     f = ProcGen.get_find(@lair.hoard, :common)
                     #TODO: Create a generate_gold helper that generates more gold based on conditions.
                     #Hoard size, time elapsed, something. Or maybe special artifacts.
                     gold_limit = get_resource(:max_gold)
-                    if get_resource_resou(:gold) > = gold_limit
+                    if get_resource(:gold) >= gold_limit
                       add_message :log, "Your treasury is too full to add more gold to it."
                     else
                       add_message :log, f.message
