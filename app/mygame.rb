@@ -144,9 +144,9 @@ class MyGame < Game
                 add_message :log, "You're far too tired to do that right now."
             end
 
-            if not unlocked?(:gems) and get_resource(:gold) > 25
-                unlock(:gems)
-            end
+            #if not unlocked?(:gems) and get_resource(:gold) > 25
+            #    unlock(:gems)
+            #end
 
             if not unlocked?(:artifacts) and get_resource(:gems) > 25
                 unlock(:artifacts)
@@ -167,6 +167,10 @@ class MyGame < Game
           unlock(:add_alcove)
         end
         # size > special:  Unlock special rooms (library unlocks Tomes, Museum unlocks artifacts)
+
+        if size > 20 and not unlocked?(:gems)
+          unlock(:gems)
+        end
     end
 
     def expand_hoard_unlocked
@@ -196,6 +200,8 @@ class MyGame < Game
 
     def gems_unlocked
         # The lair should have a custom unlock message list for this
+        add_message :log, "Your powerful claws carve through solid rock and something glitters.  Beneath the stone you find a gfreen stone with inner fire that speaks to your nature."
+        generate_resource :gems
     end
 
     def artifacts_unlocked
