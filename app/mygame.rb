@@ -118,14 +118,15 @@ class MyGame < Game
                 elsif r > 0.4 and unlocked?(:gems)
                     # TODO: Properly implement either gems or uncommon finds.
                     f = ProcGen.get_find(@lair.hoard, :uncommon) #Generate then throw away
-                    generate_resource :gems # So we find something special, but that just adds some gems?
-                    add_message :log, @lair.hoard.scratch_messages.sample() #Replace with Gem messages later
+                    generate_resource :gems, 1 + (rand < 0.2 ? 1 : 0)
+                    #add_message :log, @lair.hoard.scratch_messages.sample() #Replace with Gem messages later
+                    add_message :log, "You uncover a glittering gem embedded in the rock."
                 else
                     f = ProcGen.get_find(@lair.hoard, :common)
                     #TODO: Create a generate_gold helper that generates more gold based on conditions.
                     #Hoard size, time elapsed, something. Or maybe special artifacts.
                     gold_limit = get_resource(:max_gold)
-                    if get_resource_resou(:gold) > = gold_limit
+                    if get_resource(:gold) >= gold_limit
                       add_message :log, "Your treasury is too full to add more gold to it."
                     else
                       add_message :log, f.message
@@ -144,9 +145,9 @@ class MyGame < Game
                 add_message :log, "You're far too tired to do that right now."
             end
 
-            if not unlocked?(:gems) and get_resource(:gold) > 25
-                unlock(:gems)
-            end
+            #if not unlocked?(:gems) and get_resource(:gold) > 25
+            #    unlock(:gems)
+            #end
 
             if not unlocked?(:artifacts) and get_resource(:gems) > 25
                 unlock(:artifacts)
@@ -167,6 +168,10 @@ class MyGame < Game
           unlock(:add_alcove)
         end
         # size > special:  Unlock special rooms (library unlocks Tomes, Museum unlocks artifacts)
+
+        if size > 20 and not unlocked?(:gems)
+          unlock(:gems)
+        end
     end
 
     def expand_hoard_unlocked
@@ -196,6 +201,8 @@ class MyGame < Game
 
     def gems_unlocked
         # The lair should have a custom unlock message list for this
+        add_message :log, "Your powerful claws carve through solid rock and something glitters.  Beneath the stone you find a gfreen stone with inner fire that speaks to your nature."
+        generate_resource :gems
     end
 
     def artifacts_unlocked
