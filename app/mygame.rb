@@ -96,7 +96,7 @@ class MyGame < Game
             # Energy gain increases with the size of the hoard. +1 for every 10 gold
             # Later we can make gems and unitque artifacts do things
             # Or even shorten the tick time (ticks_total, ticks_remaining)
-            generate_resource :energy, 1 + (get_resource(:gold) / 10).floor
+            generate_resource :energy, 1 + (get_resource(:gold) / 10).floor + (get_resource(:gems) / 5).floor
         end
     end
 
@@ -169,6 +169,9 @@ class MyGame < Game
         end
         # size > special:  Unlock special rooms (library unlocks Tomes, Museum unlocks artifacts)
 
+        if size > 15 and not unlocked?(:gems)
+            add_message :log, "The stone ahead rings melodically beneath your claws."
+        end
         if size > 20 and not unlocked?(:gems)
           unlock(:gems)
         end
@@ -201,7 +204,7 @@ class MyGame < Game
 
     def gems_unlocked
         # The lair should have a custom unlock message list for this
-        add_message :log, "Your powerful claws carve through solid rock and something glitters.  Beneath the stone you find a gfreen stone with inner fire that speaks to your nature."
+        add_message :log, "Your powerful claws carve through solid rock and something glitters.  Beneath the stone you find a green gem with inner fire that speaks to your nature."
         generate_resource :gems
     end
 
@@ -232,7 +235,7 @@ class MyGame < Game
           generate_resource :max_gold, 250
           add_message :log, "You carve the treasury deeper into the stone. Your hoard can now hold more gold."
       else
-          add_message :log, "Your don't have enough space to expand your treasury."
+          add_message :log, "You don't have enough space to expand your treasury."
       end
     end
 
