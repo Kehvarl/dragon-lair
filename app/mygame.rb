@@ -72,7 +72,8 @@ class MyGame < Game
         @buttons[:add_alcove].location =  [:hoard]
         highlight_button :add_alcove, 100
 
-        create_unlock :gems         # Start finding gems after... ?
+        create_trigger :gem_hint      # Tantalize the dragon when the hoard is big enough
+        create_unlock :gems         # Start finding gems after hoard is about 20 unused spaces
         create_unlock :artifacts    # Start finding artifacts after ?
 
         create_unlock :expand_hoard # When we've first dug out enough space for more gold storage
@@ -138,6 +139,7 @@ class MyGame < Game
 
                 check_hoard_size()
 
+                auto_highlight :scratch, 100, [100 - get_resource(:gems), 30].max
                 restart_highlight :scratch, 0
                 # Need a way to speed this up over time.  Maybe some more unlocks or actors
                 # Or just calculate a faster highlight based on something.
@@ -169,9 +171,10 @@ class MyGame < Game
         end
         # size > special:  Unlock special rooms (library unlocks Tomes, Museum unlocks artifacts)
 
-        if size > 15 and not unlocked?(:gems)
-            add_message :log, "The stone ahead rings melodically beneath your claws."
+        if size > 15 and not triggered?(:gem_hint)
+          trigger(:gem_hint)
         end
+
         if size > 20 and not unlocked?(:gems)
           unlock(:gems)
         end
@@ -200,6 +203,10 @@ class MyGame < Game
 
     def check_reputation
         # Any triggers based of the dragon's reputation (maybe some follower types)
+    end
+
+    def gem_hint_triggered
+      add_message :log, "The stone ahead rings melodically beneath your claws."
     end
 
     def gems_unlocked

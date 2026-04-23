@@ -472,12 +472,20 @@ class Game
         @unlocks[key] = false
     end
 
+    def create_trigger(key)
+      create_unlock(key)
+    end
+
 # ------------------------------------------------------------
 # unlocked?
 # Returns true if the unlock has been activated.
 # ------------------------------------------------------------
     def unlocked?(key)
         @unlocks[key] == true
+    end
+
+    def triggered?(key)
+      unlocked?(key)
     end
 
 # ------------------------------------------------------------
@@ -493,11 +501,17 @@ class Game
         if not unlocked?(key)
             @unlocks[key] = true
             if self.respond_to? "#{key}_unlocked".to_sym
-                 self.send("#{key}_unlocked".to_sym)
+                self.send("#{key}_unlocked".to_sym)
+            elsif self.respond_to? "#{key}_triggered".to_sym
+                self.send("#{key}_triggered".to_sym)
             end
             return true
         end
         return false
+    end
+
+    def trigger(key)
+      unlock(key)
     end
 
 # == Logs ==
