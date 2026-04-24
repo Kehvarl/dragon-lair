@@ -124,8 +124,6 @@ class MyGame < Game
                     add_message :log, "You uncover a glittering gem embedded in the rock."
                 else
                     f = ProcGen.get_find(@lair.hoard, :common)
-                    #TODO: Create a generate_gold helper that generates more gold based on conditions.
-                    #Hoard size, time elapsed, something. Or maybe special artifacts.
                     gold_limit = get_resource(:max_gold)
                     if get_resource(:gold) >= gold_limit
                       add_message :log, "Your treasury is too full to add more gold to it."
@@ -141,8 +139,6 @@ class MyGame < Game
 
                 auto_highlight :scratch, 100, [100 - get_resource(:gems), 30].max
                 restart_highlight :scratch, 0
-                # Need a way to speed this up over time.  Maybe some more unlocks or actors
-                # Or just calculate a faster highlight based on something.
             else
                 add_message :log, "You're far too tired to do that right now."
             end
