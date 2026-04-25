@@ -2,6 +2,21 @@ require 'app/game.rb'
 require 'app/proc_gen.rb'
 
 class MyGame < Game
+  # TODO
+  # Main Game Loop
+  # - Dig/Scratch
+  #   - Costs energy
+  #   - Gain Gold
+  #   - Gain Space
+  # - Nap
+  #   - Recover Energy
+  # - Passive
+  #   - Energy Regain based on hoard size and prestige
+  # - Spend Space on Automation
+  #   - Automation generates gold
+  # - Spend Gold on Upogrades
+  #   - Strengthen Claws: Faster Gold Gain/Dig
+  #   - Deepen Treasury: Higher Gold Limit
 
     def initialize args
         super
