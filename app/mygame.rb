@@ -33,6 +33,27 @@ class MyGame < Game
     end
 
     #-------------------------------
+    # Follower Subsystem
+    # Expands the Actor module with repeatable events representing followers performing tasks
+    # Currently only generating gold.
+    #-------------------------------
+    def create_follower (type, ticks_total: 60, location: nil, always_tick: nil, &block)
+        @next_actor_id ||= 0
+        @next_actor_id += 1
+        id = "#{type}_#{@next_actor_id}".to_sym
+
+        create_actor(id, ticks_total: ticks_total, location: location, always_tick: always_tick)
+
+        @actors[id].type = type
+        @actors[id].ticks_remaining = rand(ticks_total)
+        @actors[id].on_trigger_proc = proc do |game, actor|
+          block.call(game, actor)
+          actor.ticks_remaining = actor.ticks_total
+        end
+        id
+    end
+
+    #-------------------------------
     # Globals
     # Stuff that exists and happens everywhere
     #-------------------------------
@@ -65,10 +86,13 @@ class MyGame < Game
         #create_actor :hoard_ambient, ticks_total = (600 + rand(120)), location=:hoard
         5.times do
           f = @lair.hoard.follower_types.sample()
-          create_follower(f, ticks_total: (120 + rand(120))) do |game, actor|
-            m = ProcGen.follower_treasure(actor.type)
+          follower_data = FOLLOWERS[f]
+          create_follower(f, ticks_total: follower_data.speed) do |game, actor|
+            found = ProcGen.get_find(@lair.hoard, :common)
+
+            m = ProcGen.follower_treasure(actor.type, found)
             add_message :log, m.message, m.color
-            generate_resource :gold, 5
+            generate_resource :gold, follower_data.gold
           end
         end
     end
@@ -77,22 +101,6 @@ class MyGame < Game
         add_message :log, @lair.hoard.hoard_messages.sample(), @lair.hoard.ambient_color
 
         restart_actor :hoard_ambient, ticks_total = (600 + rand(120))
-    end
-
-    def create_follower (type, ticks_total: 60, location: nil, always_tick: nil, &block)
-        @next_actor_id ||= 0
-        @next_actor_id += 1
-        id = "#{type}_#{@next_actor_id}".to_sym
-
-        create_actor(id, ticks_total: ticks_total, location: location, always_tick: always_tick)
-
-        @actors[id].type = type
-        @actors[id].on_trigger_proc = proc do |game, actor|
-          block.call(game, actor)
-
-          actor.ticks_remaining = actor.ticks_total
-        end
-        id
     end
 
     def scratch_clicked
@@ -117,14 +125,6 @@ class MyGame < Game
                 restart_highlight :scratch, 0
             else
                 add_message :log, "You're far too tired to do that right now."
-            end
-
-            #if not unlocked?(:gems) and get_resource(:gold) > 25
-            #    unlock(:gems)
-            #end
-
-            if not unlocked?(:artifacts) and get_resource(:gems) > 25
-                unlock(:artifacts)
             end
         end
     end

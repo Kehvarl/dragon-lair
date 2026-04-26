@@ -467,41 +467,53 @@ BIOMES ={
 
 FOLLOWERS = {
     :kobold => {
-        :message_color => { r: 210, g: 180, b: 120 },
-        :treasure_messages => [
-            "Kobold brings back some gold.",
-            "Kobold drags a clinking bag.",
-            "Kobold proudly waves a glittering object."
+        message_color: { r: 210, g: 180, b: 120 },
+        speed: 90,
+        gold: 1,
+        gem_chance: nil,
+        treasure_messages: [
+            "Kobold brings back %{item}.",
+            "Kobold drags in %{item}.",
+            "Kobold proudly presents %{item}."
         ],
     },
     :goblin => {
-        :message_color => { r: 180, g: 220, b: 120 },
-        :treasure_messages => [
-            "Goblin showers coins on the hoard.",
-            "Goblin prances in with some gold.",
-            "Goblin struggles to drag in a heavy chest."
+        message_color: { r: 180, g: 220, b: 120 },
+        speed: 120,
+        gold: 2,
+        gem_chance: nil,
+        treasure_messages: [
+            "Goblin showers %{item} on the hoard.",
+            "Goblin prances in with %{item}.",
+            "Goblin struggles to drag in %{item}."
         ],
     },
     :princess => {
-        :treasure_messages => [
-            "",
-            "",
-            ""
-        ],
+      message_color: { r: 210, g: 180, b: 120 },
+      speed: 150,
+      gold: 1,
+      gem_chance: 0.2,
+      treasure_messages: [
+          ""
+      ],
     },
     :dryad => {
-        :treasure_messages => [
-            "",
-            "",
-            ""
-        ],
+      message_color: { r: 210, g: 180, b: 120 },
+      speed: 180,
+      gold: 0,
+      gem_chance: 0.2,
+      treasure_messages: [
+          ""
+      ],
     },
     :merfolk => {
-        :treasure_messages => [
-            "",
-            "",
-            ""
-        ],
+      message_color: { r: 210, g: 180, b: 120 },
+      speed: 90,
+      gold: 2,
+      gem_chance: nil,
+      treasure_messages: [
+          ""
+      ],
     },
 }
 
@@ -524,6 +536,9 @@ COIN = {
             {material: "gold", value: 1.5},
             {material: "platinum", value: 2.0},
         ],
+    },
+    description: ->(c) {
+        "A #{c.condition.condition} #{c.material.material} coin"
     },
     template: ->(c, action) {
         "A #{c.condition.condition} #{c.material.material} coin #{action}."
@@ -567,6 +582,9 @@ JEWELRY = {
 
         ],
     },
+    description: ->(j) {
+        "A #{j.condition.condition} #{j.material.material} #{j.type.type}"
+    },
     template: ->(j, action) {
         "A #{j.condition.condition} #{j.material.material} #{j.type.type} #{action}."
     },
@@ -605,6 +623,9 @@ RING = {
             {type: "signet", value: 1.0},
             {type: "cameo", value: 1.0},
         ],
+    },
+    description: ->(r) {
+        "A #{r.condition.condition} #{r.material.material} #{r.type.type}."
     },
     template: ->(r, action) {
         "A #{r.condition.condition} #{r.material.material} #{r.type.type} #{action}."
