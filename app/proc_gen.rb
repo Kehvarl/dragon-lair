@@ -14,8 +14,10 @@ module ProcGen
         }
     end
 
-    def self.follower_treasure follower
-      {message: FOLLOWERS[follower].treasure_messages.sample(), color: FOLLOWERS[follower].message_color}
+    def self.follower_treasure follower, find
+      f = FOLLOWERS[follower]
+
+      {message: f.treasure_messages.sample() % {item: find.description.downcase()}, color: f.message_color}
     end
 
     def self.build_item type
@@ -25,7 +27,7 @@ module ProcGen
             features[key] = list.sample
         end
         action = type.action.sample
-        {message: type.template.call(features, action), value: type.value.call(features)}
+        {message: type.template.call(features, action), description: type.description.call(features), value: type.value.call(features)}
     end
 
     def self.get_find biome, rarity
@@ -51,6 +53,6 @@ module ProcGen
             message = "NOT YET IMPLEMENTED"
             return {message: message, type: type, value: value}
         end
-        {message: item.message, type:type, value:item.value}
+        {message: item.message, description: item.description, type:type, value:item.value}
     end
 end
