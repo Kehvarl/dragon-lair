@@ -446,7 +446,7 @@ BIOMES ={
             "You settle into the familiar weight of your treasure.",
             "Coins shift softly as you relax.",
             "Your breathing slows as you rest atop your hoard."
-        ],  
+        ],
         hoard_messages: [
             "The hoard settles softly.",
             "A faint clink echoes through the cave.",
@@ -467,17 +467,19 @@ BIOMES ={
 
 FOLLOWERS = {
     :kobold => {
+        :message_color => { r: 210, g: 180, b: 120 },
         :treasure_messages => [
-            "",
-            "",
-            ""
+            "Kobold brings back some gold.",
+            "Kobold drags a clinking bag.",
+            "Kobold proudly waves a glittering object."
         ],
     },
     :goblin => {
+        :message_color => { r: 180, g: 220, b: 120 },
         :treasure_messages => [
-            "",
-            "",
-            ""
+            "Goblin showers coins on the hoard.",
+            "Goblin prances in with some gold.",
+            "Goblin struggles to drag in a heavy chest."
         ],
     },
     :princess => {

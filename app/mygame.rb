@@ -2,6 +2,21 @@ require 'app/game.rb'
 require 'app/proc_gen.rb'
 
 class MyGame < Game
+  # TODO
+  # Main Game Loop
+  # - Dig/Scratch
+  #   - Costs energy
+  #   - Gain Gold
+  #   - Gain Space
+  # - Nap
+  #   - Recover Energy
+  # - Passive
+  #   - Energy Regain based on hoard size and prestige
+  # - Spend Space on Automation
+  #   - Automation generates gold
+  # - Spend Gold on Upogrades
+  #   - Strengthen Claws: Faster Gold Gain/Dig
+  #   - Deepen Treasury: Higher Gold Limit
 
     def initialize args
         super
@@ -48,12 +63,36 @@ class MyGame < Game
         reveal_button :scratch
 
         #create_actor :hoard_ambient, ticks_total = (600 + rand(120)), location=:hoard
+        5.times do
+          f = @lair.hoard.follower_types.sample()
+          create_follower(f, ticks_total: (120 + rand(120))) do |game, actor|
+            m = ProcGen.follower_treasure(actor.type)
+            add_message :log, m.message, m.color
+            generate_resource :gold, 5
+          end
+        end
     end
 
     def hoard_ambient_trigger
         add_message :log, @lair.hoard.hoard_messages.sample(), @lair.hoard.ambient_color
 
         restart_actor :hoard_ambient, ticks_total = (600 + rand(120))
+    end
+
+    def create_follower (type, ticks_total: 60, location: nil, always_tick: nil, &block)
+        @next_actor_id ||= 0
+        @next_actor_id += 1
+        id = "#{type}_#{@next_actor_id}".to_sym
+
+        create_actor(id, ticks_total: ticks_total, location: location, always_tick: always_tick)
+
+        @actors[id].type = type
+        @actors[id].on_trigger_proc = proc do |game, actor|
+          block.call(game, actor)
+
+          actor.ticks_remaining = actor.ticks_total
+        end
+        id
     end
 
     def scratch_clicked

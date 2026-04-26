@@ -2,7 +2,10 @@ require 'app/game.rb'
 require 'app/mygame.rb'
 
 def init args
-    args.state.current = :menu
+    #args.state.current = :menu
+    args.state.dragon_type = :forest
+    args.state.game = MyGame.new(args)
+    args.state.current = :game
 end
 
 

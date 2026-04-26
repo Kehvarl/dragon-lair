@@ -89,6 +89,11 @@ class Game
                     actor.on_tick_proc.call(self, actor)
                 elsif actor.on_tick && respond_to?(actor.on_tick)
                     self.send(actor.on_tick)
+                elsif actor.on_trigger_proc && actor.ticks_remaining > 0
+                    actor.ticks_remaining -=1
+                    if actor.ticks_remaining <= 0
+                        actor.on_trigger_proc.call(self, actor)
+                    end
                 elsif actor.on_trigger && respond_to?(actor.on_trigger) && actor.ticks_remaining > 0
                     #auto tick and trigger at 0
                     actor.ticks_remaining -=1
@@ -362,7 +367,7 @@ class Game
 # Implicit callback:
 #   <id>_tick
 # ------------------------------------------------------------
-    def create_actor id, ticks_total=60, location=nil, always_tick=nil
+    def create_actor id, ticks_total: 60, location: nil, always_tick: nil
         @actors[id] = {
                     location: location,
                     always_tick: always_tick,
@@ -371,6 +376,7 @@ class Game
                     on_tick: "#{id}_tick".to_sym,
                     on_tick_proc: nil,
                     on_trigger: "#{id}_trigger".to_sym,
+                    on_trigger_proc: nil,
             }
     end
 
