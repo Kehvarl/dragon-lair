@@ -86,12 +86,13 @@ class MyGame < Game
         #create_actor :hoard_ambient, ticks_total = (600 + rand(120)), location=:hoard
         5.times do
           f = @lair.hoard.follower_types.sample()
-          create_follower(f, ticks_total: (120 + rand(120))) do |game, actor|
+          follower_data = FOLLOWERS[f]
+          create_follower(f, ticks_total: follower_data.speed) do |game, actor|
             found = ProcGen.get_find(@lair.hoard, :common)
 
             m = ProcGen.follower_treasure(actor.type, found)
             add_message :log, m.message, m.color
-            generate_resource :gold, found.value
+            generate_resource :gold, follower_data.gold
           end
         end
     end
