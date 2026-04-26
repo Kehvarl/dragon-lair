@@ -14,6 +14,10 @@ module ProcGen
         }
     end
 
+    def self.follower_treasure follower
+      {message: FOLLOWERS[follower].treasure_messages.sample(), color: FOLLOWERS[follower].message_color}
+    end
+
     def self.build_item type
         features = {}
 
