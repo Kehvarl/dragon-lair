@@ -2,22 +2,6 @@ require 'app/game.rb'
 require 'app/proc_gen.rb'
 
 class MyGame < Game
-  # TODO
-  # Main Game Loop
-  # - Dig/Scratch
-  #   - Costs energy
-  #   - Gain Gold
-  #   - Gain Space
-  # - Nap
-  #   - Recover Energy
-  # - Passive
-  #   - Energy Regain based on hoard size and prestige
-  # - Spend Space on Automation
-  #   - Automation generates gold
-  # - Spend Gold on Upogrades
-  #   - Strengthen Claws: Faster Gold Gain/Dig
-  #   - Deepen Treasury: Higher Gold Limit
-
     def initialize args
         super
 
@@ -103,10 +87,22 @@ class MyGame < Game
         restart_actor :hoard_ambient, ticks_total = (600 + rand(120))
     end
 
+    # TODO
+    # Main Game Loop
+    # - Dig/Scratch
+    #   - Costs energy
+    #   - Gain Gold
+    #   - Gain Space
+    # - Nap
+    #   - Recover Energy
+    # - Passive
+    #   - Energy Regain based on hoard size and prestige
+    # - Spend Space on Automation
+    #   - Automation generates gold
+    # - Spend Gold on Upogrades
+    #   - Strengthen Claws: Faster Gold Gain/Dig
+    #   - Deepen Treasury: Higher Gold Limit
     def scratch_clicked
-        # Scratch at the cave walls
-        # - Gain Gold
-        # - Expand Hoard Space
 
         if button_highlight_full?(:scratch)
             if use_resource(:energy, 9 + rand(4))
