@@ -5,6 +5,14 @@ require 'app/proc_gen.rb'
 # In most Idle games, folowers or whatnot would justt be a count you can assign to jobs
 # That's probably a smarter way to go about things.
 
+# TODO
+# Remove NPC follower code, or move that to an NPC Module
+# Create Follower resources.  Possibly per follower type
+# Create Follower Assignment system:
+#   Assign or unassign followers on tasks.
+#   Each Task tick, generate based on assigned follower count
+#   Do different follower types only do certain tasks or have task bonuses
+
 class MyGame < Game
     def initialize args
         super
