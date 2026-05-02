@@ -1,9 +1,6 @@
 require 'app/game.rb'
 require 'app/proc_gen.rb'
-# Thoughts on Followers
-# Currently each follower is  unique NPC
-# In most Idle games, folowers or whatnot would justt be a count you can assign to jobs
-# That's probably a smarter way to go about things.
+
 
 # TODO
 # Remove NPC follower code, or move that to an NPC Module
