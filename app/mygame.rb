@@ -21,16 +21,24 @@ class MyGame < Game
         @location = :hoard
         @hoard_items = []
 
+        @followers = 0
+        @max_followers = 0
+        @follower_assignment = {
+          gather: 0,
+          hunt: 0,
+          reputation: 0,
+        }
+
         setup_global
         setup_hoard
     end
 
     #-------------------------------
-    # Follower Subsystem
-    # Expands the Actor module with repeatable events representing followers performing tasks
+    # NPC Subsystem
+    # Expands the Actor module with repeatable events representing NPCs performing tasks
     # Currently only generating gold.
     #-------------------------------
-    def create_follower (type, ticks_total: 60, location: nil, always_tick: nil, &block)
+    def create_npc (type, ticks_total: 60, location: nil, always_tick: nil, &block)
         @next_actor_id ||= 0
         @next_actor_id += 1
         id = "#{type}_#{@next_actor_id}".to_sym
@@ -44,6 +52,24 @@ class MyGame < Game
           actor.ticks_remaining = actor.ticks_total
         end
         id
+    end
+
+    #-------------------------------
+    # Example of creating multiple NPCs
+    #-------------------------------
+    def test_npcs count=5
+      #create_actor :hoard_ambient, ticks_total = (600 + rand(120)), location=:hoard
+      count.times do
+        f = @lair.hoard.follower_types.sample()
+        follower_data = FOLLOWERS[f]
+        create_follower(f, ticks_total: follower_data.speed) do |game, actor|
+          found = ProcGen.get_find(@lair.hoard, :common)
+
+          m = ProcGen.follower_treasure(actor.type, found)
+          add_message :log, m.message, m.color
+          generate_resource :gold, follower_data.gold
+        end
+      end
     end
 
     #-------------------------------
@@ -76,18 +102,7 @@ class MyGame < Game
         auto_highlight :scratch, 100, 100
         reveal_button :scratch
 
-        #create_actor :hoard_ambient, ticks_total = (600 + rand(120)), location=:hoard
-        5.times do
-          f = @lair.hoard.follower_types.sample()
-          follower_data = FOLLOWERS[f]
-          create_follower(f, ticks_total: follower_data.speed) do |game, actor|
-            found = ProcGen.get_find(@lair.hoard, :common)
 
-            m = ProcGen.follower_treasure(actor.type, found)
-            add_message :log, m.message, m.color
-            generate_resource :gold, follower_data.gold
-          end
-        end
     end
 
     def hoard_ambient_trigger
