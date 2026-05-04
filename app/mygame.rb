@@ -73,6 +73,18 @@ class MyGame < Game
     end
 
     #-------------------------------
+    # Followers
+    #-------------------------------
+    def add_follower
+    end
+
+    def assign_follower
+    end
+
+    def unassign_follower
+    end
+
+    #-------------------------------
     # Globals
     # Stuff that exists and happens everywhere
     #-------------------------------
