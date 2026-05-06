@@ -101,6 +101,9 @@ class MyGame < Game
       end
     end
 
+    def follower_tick
+    end
+
     #-------------------------------
     # Globals
     # Stuff that exists and happens everywhere
