@@ -76,12 +76,29 @@ class MyGame < Game
     # Followers
     #-------------------------------
     def add_follower
+      if @followers < @max_followers
+        @followers += 1
+      end
     end
 
-    def assign_follower
+    def count_assigned_followers
+      total = 0
+      @follower_assignment.each do |fa|
+        total += @follower_assignment[fa]
+      end
+      return total
     end
 
-    def unassign_follower
+    def assign_follower task
+      if @follower_assignment.include?(task) && count_assigned_followers < @followers
+        @follower_assignment[task] += 1
+      end
+    end
+
+    def unassign_follower task
+      if @follower_assignment.include?(task) && @follower_assignment[task] > 0
+        @follower_assignment[task] -= 1
+      end
     end
 
     #-------------------------------
