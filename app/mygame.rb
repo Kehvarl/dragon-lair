@@ -101,9 +101,6 @@ class MyGame < Game
       end
     end
 
-    def follower_tick
-    end
-
     #-------------------------------
     # Globals
     # Stuff that exists and happens everywhere
@@ -135,12 +132,24 @@ class MyGame < Game
         reveal_button :scratch
 
 
+        create_button :nap, 600, 300, "Nap"
+        @buttons[:nap].location =  [:hoard]
+        highlight_button :nap, 100
+        reveal_button :nap
+
+        create_actor :follower_tick, ticks_total: 600, location: :hoard
     end
 
     def hoard_ambient_trigger
         add_message :log, @lair.hoard.hoard_messages.sample(), @lair.hoard.ambient_color
 
         restart_actor :hoard_ambient, ticks_total = (600 + rand(120))
+    end
+
+    def follower_tick_trigger
+      add_message :log, "Follower ticked..."
+
+      restart_actor :follower_tick
     end
 
     # TODO
@@ -179,5 +188,19 @@ class MyGame < Game
                 add_message :log, "You're far too tired to do that right now."
             end
         end
+    end
+
+    def nap_clicked
+        # Time passes. That should do something.
+        # TODO:
+        #   Fast-forward time passing.
+        #   = This means we need some way to just say "X time passed" instead of simulating every tick
+        #   Things that might happen (These all look like agents to me)
+        #   = Servants performing chores
+        #   = Natural events
+        #   = Bandit incursions -- Need to interrupt nap to resolve
+
+        add_message :log, @lair.hoard.nap_messages.sample()
+        set_resource :energy, 100
     end
 end
