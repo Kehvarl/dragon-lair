@@ -1,22 +1,7 @@
-* EXCEPTION:
-* ERROR - :downcase method missing on ~NilClass~.
-
-#+begin_src ~NilClass#inspect~
-nil
-#+end_src ~NilClass#inspect~
-
-
-
-The method named
-  :downcase
-doesn't exist on [NilClass, NilClassFalseClass].
-
-(suggestions above)
+* EXCEPTION: 'create_actor': wrong number of arguments (3 for 1)
 ** Backtrace:
-*** app/proc_gen.rb:20:in follower_treasure
-*** app/mygame.rb:92:in setup_hoard
-*** app/mygame.rb:50:in create_follower
-*** app/game.rb:95:in tick
-*** app/game.rb:86:in tick
-*** app/main.rb:72:in game_tick
-*** app/main.rb:93:in tick
+*** app/game.rb:370:in create_actor
+*** app/mygame.rb:134:in setup_hoard
+*** app/mygame.rb:33:in initialize
+*** app/main.rb:7:in init
+*** app/main.rb:87:in tick
