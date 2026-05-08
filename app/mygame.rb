@@ -3,6 +3,22 @@ require 'app/proc_gen.rb'
 
 
 # TODO
+# Main Game Loop
+# - Dig/Scratch
+#   - Costs energy
+#   - Gain Gold
+#   - Gain Space
+# - Nap
+#   - Recover Energy
+# - Passive
+#   - Energy Regain based on hoard size and prestige
+# - Spend Space on Automation
+#   - Automation generates gold
+# - Spend Gold on Upogrades
+#   - Strengthen Claws: Faster Gold Gain/Dig
+#   - Deepen Treasury: Higher Gold Limit
+
+# TODO
 # Remove NPC follower code, or move that to an NPC Module
 # Create Follower resources.  Possibly per follower type
 # Create Follower Assignment system:
@@ -115,7 +131,7 @@ class MyGame < Game
         set_resource :gold, 0
         set_resource :gems, 0, show: false
         set_resource :max_gold, 1000, show: false
-        set_resource :max_followers, 1, show: false
+        #set_resource :max_followers, 1, show: false
 
         # create_actor :energy, ticks_total=120, location=:hoard
     end
@@ -152,21 +168,7 @@ class MyGame < Game
       restart_actor :follower_tick
     end
 
-    # TODO
-    # Main Game Loop
-    # - Dig/Scratch
-    #   - Costs energy
-    #   - Gain Gold
-    #   - Gain Space
-    # - Nap
-    #   - Recover Energy
-    # - Passive
-    #   - Energy Regain based on hoard size and prestige
-    # - Spend Space on Automation
-    #   - Automation generates gold
-    # - Spend Gold on Upogrades
-    #   - Strengthen Claws: Faster Gold Gain/Dig
-    #   - Deepen Treasury: Higher Gold Limit
+
     def scratch_clicked
 
         if button_highlight_full?(:scratch)
