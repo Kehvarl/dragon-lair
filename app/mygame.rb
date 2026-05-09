@@ -19,8 +19,6 @@ require 'app/proc_gen.rb'
 #   - Deepen Treasury: Higher Gold Limit
 
 # TODO
-# Remove NPC follower code, or move that to an NPC Module
-# Create Follower resources.  Possibly per follower type
 # Create Follower Assignment system:
 #   Assign or unassign followers on tasks.
 #   Each Task tick, generate based on assigned follower count
