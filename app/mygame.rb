@@ -102,8 +102,8 @@ class MyGame < Game
 
     def count_assigned_followers
       total = 0
-      @follower_assignment.each do |fa|
-        total += @follower_assignment[fa]
+      @follower_assignment.each_value do |fa|
+        total += fa
       end
       return total
     end
