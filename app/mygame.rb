@@ -42,6 +42,11 @@ class MyGame < Game
           hunt: 0,
           reputation: 0,
         }
+        @follower_progress = {
+          gather: {curr: 0, target: 100, per_tick: 1},
+          hunt: {curr: 0, target: 100, per_tick: 1},
+          reputation: {curr: 0, target: 500, per_tick: 1},
+        }
 
         setup_global
         setup_hoard
@@ -97,8 +102,8 @@ class MyGame < Game
 
     def count_assigned_followers
       total = 0
-      @follower_assignment.each do |fa|
-        total += @follower_assignment[fa]
+      @follower_assignment.each_value do |fa|
+        total += fa
       end
       return total
     end
@@ -113,6 +118,18 @@ class MyGame < Game
       if @follower_assignment.include?(task) && @follower_assignment[task] > 0
         @follower_assignment[task] -= 1
       end
+    end
+
+    def follower_action action
+      triggers = 0
+      active = @follower_assignment[action]
+      progress = @follower_progress[action]
+      progess.curr += (progress.per_tick * active)
+      if progress.curr >= progress.target
+        triggers += progress.curr / progress.target
+        progress.curr %= progress.target
+      end
+      return triggers
     end
 
     #-------------------------------
@@ -161,7 +178,12 @@ class MyGame < Game
     end
 
     def follower_tick_trigger
-      add_message :log, "Follower ticked..."
+      for a in @follower_assignment
+        times = follower_action a
+        if times > 0
+          puts "#{a.to_s} fired #{times}"
+        end
+      end
 
       restart_actor :follower_tick
     end
