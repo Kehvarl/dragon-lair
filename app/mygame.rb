@@ -35,12 +35,12 @@ class MyGame < Game
         @location = :hoard
         @hoard_items = []
 
-        @followers = 0
-        @max_followers = 0
+        @followers = 5
+        @max_followers = 5
         @follower_assignment = {
-          gather: 0,
-          hunt: 0,
-          reputation: 0,
+          gather: 2,
+          hunt: 2,
+          reputation: 1,
         }
         @follower_progress = {
           gather: {curr: 0, target: 100, per_tick: 1},
@@ -122,11 +122,11 @@ class MyGame < Game
 
     def follower_action action
       triggers = 0
-      active = @follower_assignment[action]
+      active = @follower_assignment[action] || 0
       progress = @follower_progress[action]
-      progess.curr += (progress.per_tick * active)
+      progress.curr += (progress.per_tick * active)
       if progress.curr >= progress.target
-        triggers += progress.curr / progress.target
+        triggers += (progress.curr / progress.target).floor
         progress.curr %= progress.target
       end
       return triggers
@@ -168,7 +168,7 @@ class MyGame < Game
         highlight_button :nap, 100
         reveal_button :nap
 
-        create_actor :follower_tick, ticks_total: 600, location: :hoard
+        create_actor :follower_tick, ticks_total: 6, location: :hoard
     end
 
     def hoard_ambient_trigger
@@ -178,10 +178,18 @@ class MyGame < Game
     end
 
     def follower_tick_trigger
-      for a in @follower_assignment
+      @follower_assignment.each_key do |a|
         times = follower_action a
         if times > 0
           puts "#{a.to_s} fired #{times}"
+          case a
+          when :gather
+            generate_resource :gold, times
+          when :hunt
+            generate_resource :food, times
+          when :reputation
+            generate_resource :reputation, times
+          end
         end
       end
 
