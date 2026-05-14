@@ -32,10 +32,12 @@ class Game
         @visited_locations = {}
         @unlocks = {}
         @buttons = {}
+        @labels = {}
         @actors = {}
         @values = {}
         @logs = {}
         @default_button_color = {r:128,g:128,b:128}
+        @default_label_color = {r:255,g:255,b:255}
         @default_border_color = {r:64,g:64,b:64}
         @default_highlight_color = {r:196,g:196,b:196}
         @default_text_color = {r:0,g:0,b:0}
@@ -118,6 +120,14 @@ class Game
             end
         end
 
+        @labels.each do |_, label|
+            if button_can_tick?(label)
+                if label.on_tick && self.respond_to?(label.on_tick)
+                    self.send(label.on_tick)
+                end
+            end
+        end
+
         handle_mouse_click
 
     end
@@ -134,6 +144,13 @@ class Game
             if button.show
                 if location_match?(button.location)
                     @args.outputs.primitives << button.primitives
+                end
+            end
+        end
+        @labels.each do |_, label|
+            if label.show
+                if location_match?(label.location)
+                    @args.outputs.primitives << label.primitives
                 end
             end
         end
@@ -229,6 +246,41 @@ class Game
             end
         end
     end
+
+  # == Labels ==
+
+  # ------------------------------------------------------------
+  # create_label
+  # Registers a label
+  #
+  # Hidden by default.
+  # Optional location limits render/tick scope.
+  # Optional on_tick_proc overrides implicit <id>_tick dispatch with a lambda.
+  #
+  # Implicit callbacks:
+  #   <id>_tick
+  # ------------------------------------------------------------
+      def create_label id, x, y, text, w=nil, h=nil, location=nil, always_tick=nil
+          if w == nil or h == nil
+              w, h = @args.gtk.calcstringbox text
+              w += 20
+              h += 20
+          end
+          @labels[id] = {
+              show: true,
+              text: text,
+              location: location,
+              always_tick: always_tick,
+              on_tick: "#{id}_tick".to_sym,
+              highlight_percent: 0,
+              highlight: false,
+              primitives: [
+                  {x:x, y:y, w:w, h:h, **@default_label_color}.solid!,
+                  {x:x, y:y, w:0, h:h, **@default_highlight_color}.solid!,
+                  {x:x, y:y, w:w, h:h, **@default_border_color}.border!,
+                  {x: x + 10, y:y + 30 ,text:text, **@default_text_color}.label!,
+              ]}
+      end
 
 # == Buttons ==
 

@@ -168,15 +168,17 @@ class MyGame < Game
         highlight_button :nap, 100
         reveal_button :nap
 
-        create_actor :follower_tick, ticks_total: 6, location: :hoard
-        # Instead of 1 follower tick we could create an actor per follower activity
-        # possible concerns: Do we tick _faster_ for more assigned followers, or do we generate more on tick?
-        # With the current system we can scale tick speed based on assigned count
-        # With an acter per activity we're a little more restricted.
-        # create_actor :gather_tick, ticks_total: 10, location: :hoard
-        # create_actor :hunt_tick, ticks_total: 10, location: :hoard
-        # create_actor :reputation_tick, ticks_total: 10, location: :hoard
+        create_label :gather, 625, 400, "Gather"
+        create_button :gather_sub, 600, 400, "-"
+        @buttons[:gather_sub].location =  [:hoard]
+        highlight_button :gather_sub, 100
+        reveal_button :gather_sub
+        create_button :gather_add, 700, 400, "+"
+        @buttons[:gather_add].location =  [:hoard]
+        highlight_button :gather_add, 100
+        reveal_button :gather_add
 
+        create_actor :follower_tick, ticks_total: 6, location: :hoard
     end
 
     def hoard_ambient_trigger

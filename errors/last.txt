@@ -1,7 +1,22 @@
-* EXCEPTION: 'create_actor': wrong number of arguments (3 for 1)
+* EXCEPTION:
+* ERROR - :[]= method missing on ~NilClass~.
+
+#+begin_src ~NilClass#inspect~
+nil
+#+end_src ~NilClass#inspect~
+
+
+
+The method named
+  :[]=
+with args
+  [:gather, {:show=>true, :text=>"Gather", :location=>nil, :always_tick=>nil, :on_tick=>:gather_tick, :highlight_percent=>0, :highlight=>false, :primitives=>[{:x=>655, :y=>450, :w=>79.40000152587891, :h=>42.0, :r=>255, :g=>255, :b=>255, :primitive_marker=>:solid}, {:x=>655, :y=>450, :w=>0, :h=>42.0, :r=>196, :g=>196, :b=>196, :primitive_marker=>:solid}, {:x=>655, :y=>450, :w=>79.40000152587891, :h=>42.0, :r=>64, :g=>64, :b=>64, :primitive_marker=>:border}, {:x=>665, :y=>480, :text=>"Gather", :r=>0, :g=>0, :b=>0, :primitive_marker=>:label}]}]
+doesn't exist on [NilClass, NilClassFalseClass].
+
+(suggestions above)
 ** Backtrace:
-*** app/game.rb:370:in create_actor
-*** app/mygame.rb:134:in setup_hoard
-*** app/mygame.rb:33:in initialize
+*** app/game.rb:262:in create_label
+*** app/mygame.rb:171:in setup_hoard
+*** app/mygame.rb:52:in initialize
 *** app/main.rb:7:in init
 *** app/main.rb:87:in tick
