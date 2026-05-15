@@ -282,6 +282,18 @@ class Game
               ]}
       end
 
+    # ------------------------------------------------------------
+    # set_label_text
+    # Change the text of a label
+    #
+    # ------------------------------------------------------------
+      def set_label_text(id, text)
+          label = @labels[id]
+
+          label.text = text
+          label.primitives[3].text = text
+      end
+
 # == Buttons ==
 
 # ------------------------------------------------------------
