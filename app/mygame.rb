@@ -35,8 +35,8 @@ class MyGame < Game
         @location = :hoard
         @hoard_items = []
 
-        @followers = 0
-        @max_followers = 0
+        @followers = 5
+        @max_followers = 5
         @follower_assignment = {
           gather: 0,
           hunt: 0,
@@ -168,12 +168,14 @@ class MyGame < Game
         highlight_button :nap, 100
         reveal_button :nap
 
-        create_label :gather, 625, 400, "Gather"
+        create_label :gather, 625, 450, "Followers _/_"
+
+        create_label :gather, 625, 400, "Gather _/_"
         create_button :gather_sub, 600, 400, "-"
         @buttons[:gather_sub].location =  [:hoard]
         highlight_button :gather_sub, 100
         reveal_button :gather_sub
-        create_button :gather_add, 700, 400, "+"
+        create_button :gather_add, 744, 400, "+"
         @buttons[:gather_add].location =  [:hoard]
         highlight_button :gather_add, 100
         reveal_button :gather_add
@@ -185,6 +187,26 @@ class MyGame < Game
         add_message :log, @lair.hoard.hoard_messages.sample(), @lair.hoard.ambient_color
 
         restart_actor :hoard_ambient, ticks_total = (600 + rand(120))
+    end
+
+    def gather_add_clicked
+      if count_assigned_followers() < @followers
+        @follower_assignment.gather += 1
+      end
+    end
+
+    def gather_sub_clicked
+      if @follower_assignment.gather > 0
+        @follower_assignment.gather -= 1
+      end
+    end
+
+    def followers_tick
+      set_label_text(:follwoers, "Followers #{count_assigned_followers()}/#{@followers}")
+    end
+
+    def gather_tick
+      set_label_text(:gather, "Gather #{@follower_assignment.gather}")
     end
 
     def follower_tick_trigger
