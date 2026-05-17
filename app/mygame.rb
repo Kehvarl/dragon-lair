@@ -211,7 +211,7 @@ class MyGame < Game
 
     def follower_tick_trigger
       if @followers < @max_followers and (rand(100) <= 66)
-        @followers += 1
+        @max_followers += 1
       end
 
       @follower_assignment.each_key do |a|
@@ -234,7 +234,6 @@ class MyGame < Game
 
 
     def scratch_clicked
-
         if button_highlight_full?(:scratch)
             if use_resource(:energy, 9 + rand(4))
                 f = ProcGen.get_find(@lair.hoard, :common)
