@@ -35,8 +35,8 @@ class MyGame < Game
         @location = :hoard
         @hoard_items = []
 
-        @followers = 5
-        @max_followers = 5
+        @followers = 0
+        @max_followers = 2
         @follower_assignment = {
           gather: 0,
           hunt: 0,
@@ -210,6 +210,10 @@ class MyGame < Game
     end
 
     def follower_tick_trigger
+      if @followers < @max_followers and (rand(100) <= 66)
+        @followers += 1
+      end
+
       @follower_assignment.each_key do |a|
         times = follower_action a
         if times > 0
