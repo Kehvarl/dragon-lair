@@ -115,7 +115,7 @@ class MyGame < Game
     def unassign_follower task
       if @follower_assignment.include?(task) && @follower_assignment[task] > 0
         @follower_assignment[task] -= 1
-      end
+      end  
     end
 
     def follower_action action
@@ -166,7 +166,6 @@ class MyGame < Game
         highlight_button :nap, 100
         reveal_button :nap
 
-        create_label :gather, 625, 450, "Followers _/_"
 
         create_label :gather, 625, 400, "Gather _/_"
         create_button :gather_sub, 600, 400, "-"
@@ -188,15 +187,11 @@ class MyGame < Game
     end
 
     def gather_add_clicked
-      if count_assigned_followers() < get_resource(:followers)
-        @follower_assignment.gather += 1
-      end
+      assign_follower(:gather)
     end
 
     def gather_sub_clicked
-      if @follower_assignment.gather > 0
-        @follower_assignment.gather -= 1
-      end
+      unassign_follower(:gather)
     end
 
     def followers_tick
@@ -209,7 +204,7 @@ class MyGame < Game
 
     def follower_tick_trigger
       if rand(100) <= 10
-        generate_resource(:followers, limit: get_resource(:max_followers))
+        generate_resource(:followers, 1, limit: get_resource(:max_followers))
       end
 
       @follower_assignment.each_key do |a|
