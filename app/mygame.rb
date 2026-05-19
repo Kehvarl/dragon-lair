@@ -35,8 +35,8 @@ class MyGame < Game
         @location = :hoard
         @hoard_items = []
 
-        @followers = 0
-        @max_followers = 2
+        set_resource(:followers, 0, show: true)
+        set_resource(:max_followers, 2, show: false)
         @follower_assignment = {
           gather: 0,
           hunt: 0,
@@ -95,9 +95,7 @@ class MyGame < Game
     # Followers
     #-------------------------------
     def add_follower
-      if @followers < @max_followers
-        @followers += 1
-      end
+        generate_resource(:followers, 1, limit: get_resource(:max_followers))
     end
 
     def count_assigned_followers
@@ -109,7 +107,7 @@ class MyGame < Game
     end
 
     def assign_follower task
-      if @follower_assignment.include?(task) && count_assigned_followers < @followers
+      if @follower_assignment.include?(task) && count_assigned_followers < get_resource(:followers)
         @follower_assignment[task] += 1
       end
     end
@@ -117,7 +115,7 @@ class MyGame < Game
     def unassign_follower task
       if @follower_assignment.include?(task) && @follower_assignment[task] > 0
         @follower_assignment[task] -= 1
-      end
+      end  
     end
 
     def follower_action action
@@ -168,7 +166,6 @@ class MyGame < Game
         highlight_button :nap, 100
         reveal_button :nap
 
-        create_label :gather, 625, 450, "Followers _/_"
 
         create_label :gather, 625, 400, "Gather _/_"
         create_button :gather_sub, 600, 400, "-"
@@ -190,19 +187,15 @@ class MyGame < Game
     end
 
     def gather_add_clicked
-      if count_assigned_followers() < @followers
-        @follower_assignment.gather += 1
-      end
+      assign_follower(:gather)
     end
 
     def gather_sub_clicked
-      if @follower_assignment.gather > 0
-        @follower_assignment.gather -= 1
-      end
+      unassign_follower(:gather)
     end
 
     def followers_tick
-      set_label_text(:follwoers, "Followers #{count_assigned_followers()}/#{@followers}")
+      set_label_text(:followers, "Followers #{count_assigned_followers()} // #{get_resource(:followers)}")
     end
 
     def gather_tick
@@ -210,8 +203,8 @@ class MyGame < Game
     end
 
     def follower_tick_trigger
-      if @followers < @max_followers and (rand(100) <= 66)
-        @max_followers += 1
+      if rand(100) <= 10
+        generate_resource(:followers, 1, limit: get_resource(:max_followers))
       end
 
       @follower_assignment.each_key do |a|
