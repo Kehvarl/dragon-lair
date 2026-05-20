@@ -115,7 +115,7 @@ class MyGame < Game
     def unassign_follower task
       if @follower_assignment.include?(task) && @follower_assignment[task] > 0
         @follower_assignment[task] -= 1
-      end  
+      end
     end
 
     def follower_action action
@@ -192,10 +192,6 @@ class MyGame < Game
 
     def gather_sub_clicked
       unassign_follower(:gather)
-    end
-
-    def followers_tick
-      set_label_text(:followers, "Followers #{count_assigned_followers()} // #{get_resource(:followers)}")
     end
 
     def gather_tick
