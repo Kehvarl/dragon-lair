@@ -180,6 +180,14 @@ class MyGame < Game
         create_actor :follower_tick, ticks_total: 6, location: :hoard
     end
 
+    def check_hoard_size
+      # Enough space:
+      # reveal_button :dig_treasury # Add gold storage
+      # reveal_button :dig_alcove   # Add follower space
+      # reveal_button :dig_room     # Add... something?
+      # Need to gate the reveals sensibly. OR use unlocks to reveal them if we want to trigger nifty messages
+    end
+
     def hoard_ambient_trigger
         add_message :log, @lair.hoard.hoard_messages.sample(), @lair.hoard.ambient_color
 
@@ -220,7 +228,6 @@ class MyGame < Game
 
       restart_actor :follower_tick
     end
-
 
     def scratch_clicked
         if button_highlight_full?(:scratch)
