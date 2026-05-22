@@ -177,15 +177,55 @@ class MyGame < Game
         highlight_button :gather_add, 100
         reveal_button :gather_add
 
+        create_unlock :expand_hoard # When we've first dug out enough space for more gold storage
+        create_unlock :add_alcove   # When we first can add space for followers
+        create_unlock :add_special  # Special Rooms unlock when something happens.
+
         create_actor :follower_tick, ticks_total: 6, location: :hoard
     end
 
     def check_hoard_size
-      # Enough space:
-      # reveal_button :dig_treasury # Add gold storage
-      # reveal_button :dig_alcove   # Add follower space
-      # reveal_button :dig_room     # Add... something?
-      # Need to gate the reveals sensibly. OR use unlocks to reveal them if we want to trigger nifty messages
+        size = get_resource(:hoard_size)
+        # Trigger some unlocks based on size
+        # size > expand_size, reveal expand button (increase gold limit)
+        if size > 10 and not unlocked?(:expand_hoard)
+          unlock(:expand_hoard)
+        end
+        # size > venture_size, start venture countdown
+        # size > lair_size, reveal/activate Add-Lair button to increase follower limit
+        if size > 15 and not unlocked?(:add_alcove)
+          unlock(:add_alcove)
+        end
+        # size > special:  Unlock special rooms (library unlocks Tomes, Museum unlocks artifacts)
+
+        if size > 15 and not triggered?(:gem_hint)
+          trigger(:gem_hint)
+        end
+
+        if size > 20 and not unlocked?(:gems)
+          unlock(:gems)
+        end
+    end
+
+    def expand_hoard_unlocked
+        # Message about hoard size.  Maybe we hold off until we run close to the gold limit
+        add_message :log, "Your hoard has grown cramped. You could deepen the treasury."
+        # reveal_button(:deepen_treasury)
+        # Show Expand_Hoard button
+    end
+
+    def add_alcove_unlocked
+        # Show Add_Lair button to add space for new max_followers
+        add_message :log, "You could add space for a follower."
+        # reveal_button(:add_alcove)
+        # Start Follower Random Encounter Timer
+    end
+
+    def add_special_unlocked
+        # Show Buttons for special rooms (Or just one, or just unlock the ability to reveal them)
+        # Library
+        # Museum
+        # Other.
     end
 
     def hoard_ambient_trigger
